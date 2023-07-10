@@ -13,6 +13,7 @@
 		FC298FFD2A5AEAF4005AACEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC298FFB2A5AEAF4005AACEF /* Main.storyboard */; };
 		FC298FFF2A5AEAF4005AACEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC298FFE2A5AEAF4005AACEF /* Assets.xcassets */; };
 		FC2990022A5AEAF4005AACEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC2990002A5AEAF4005AACEF /* LaunchScreen.storyboard */; };
+		FC8730232A5C506700370EEF /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8730222A5C506700370EEF /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		FC298FFE2A5AEAF4005AACEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC2990012A5AEAF4005AACEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC2990032A5AEAF4005AACEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC8730222A5C506700370EEF /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				FC298FF52A5AEAF4005AACEF /* AppDelegate.swift */,
 				FC298FF72A5AEAF4005AACEF /* SceneDelegate.swift */,
 				FC298FF92A5AEAF4005AACEF /* ViewController.swift */,
+				FC8730222A5C506700370EEF /* CollectionViewCell.swift */,
 				FC298FFB2A5AEAF4005AACEF /* Main.storyboard */,
 				FC298FFE2A5AEAF4005AACEF /* Assets.xcassets */,
 				FC2990002A5AEAF4005AACEF /* LaunchScreen.storyboard */,
@@ -140,6 +143,7 @@
 			files = (
 				FC298FFA2A5AEAF4005AACEF /* ViewController.swift in Sources */,
 				FC298FF62A5AEAF4005AACEF /* AppDelegate.swift in Sources */,
+				FC8730232A5C506700370EEF /* CollectionViewCell.swift in Sources */,
 				FC298FF82A5AEAF4005AACEF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
