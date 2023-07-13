@@ -14,19 +14,68 @@ protocol CustomAlertDelegate{
 
 class CustomAlertViewController: UIViewController {
 
+    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var notificationPicker: UIButton!
-    @IBOutlet weak var datePicker: NSLayoutConstraint!
+    var selectedType:String = ""
     var delegate:CustomAlertDelegate? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNitificationPickerMenu()
         
+    }
+    func setNitificationPickerMenu(){
+
+        notificationPicker.menu = UIMenu(title:"Pick notification type",options: .displayInline, children: [
+            UIAction(title: "Barber", image: UIImage(named: "Barber"), handler: {(_) in
+                print("test1")
+                self.selectedType = "Barber"
+                self.notificationPicker.setTitle(self.selectedType, for: .normal)
+            }),
+            UIAction(title: "Bath", image: UIImage(named: "Bath"), handler: {(_) in
+                print("test2")
+                self.selectedType = "Bath"
+                self.notificationPicker.setTitle(self.selectedType, for: .normal)
+            }),
+            UIAction(title: "Contest", image: UIImage(named: "Contest"), handler: {(_) in
+                print("test3")
+                self.selectedType = "Contest"
+                self.notificationPicker.setTitle(self.selectedType, for: .normal)
+            }),
+            UIAction(title: "Dental care", image: UIImage(named: "Dental care"), handler: {(_) in
+                print("test4")
+                self.selectedType = "Dental care"
+                self.notificationPicker.setTitle(self.selectedType, for: .normal)
+                
+            }),
+            UIAction(title: "Flea care", image: UIImage(named: "Flea care"), handler: {(_) in
+                print("test5")
+                self.selectedType = "Flea care"
+                self.notificationPicker.setTitle(self.selectedType, for: .normal)
+            }),
+            UIAction(title: "Order food", image: UIImage(named: "Order food"), handler: {(_) in
+                print("test6")
+                self.selectedType = "Order food"
+                self.notificationPicker.setTitle(self.selectedType, for: .normal)
+            }),
+            UIAction(title: "Training", image: UIImage(named: "Training"), handler: {(_) in
+                print("test7")
+                self.selectedType = "Training"
+                self.notificationPicker.setTitle(self.selectedType, for: .normal)
+            }),
+            UIAction(title: "Vaccination", image: UIImage(named: "Vaccination"), handler: {(_) in
+                print("test8")
+                self.selectedType = "Vaccination"
+                self.notificationPicker.setTitle(self.selectedType, for: .normal)
+            })])
     }
     
 
     @IBAction func onSaveClicked(_ sender: Any) {
-        delegate?.onSaveClicked(type: "String", date: Date())
-        print("saved")
+        if(self.selectedType != "" && datePicker.date >= Date()){
+            delegate?.onSaveClicked(type: self.selectedType, date: datePicker.date)
+        }
+        
     }
     
     @IBAction func onCancelClicked(_ sender: Any) {

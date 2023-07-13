@@ -9,11 +9,14 @@ import UIKit
 
 class HomePageViewController: UIViewController {
 
-    
-    
+    @IBOutlet weak var morningWalk: UIButton!
+    @IBOutlet weak var eveningWalk: UIButton!
+    @IBOutlet weak var afternoonWalk: UIButton!
+    @IBOutlet weak var supper: UIButton!
+    @IBOutlet weak var breakfast: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
-    let images: [String] = ["barber", "bowl_empty", "bowl_full", "walk_empty", "walk_full"]
-    let names: [String] = ["barber", "bowl_empty", "bowl_full", "walk_empty", "walk_full"]
+    let images: [String] = ["Barber", "Contest", "Training", "Bath", "Dental care"]
+    let names: [String] = ["Barber", "Contest", "Training", "Bath", "Dental care"]
     let dates: [String] = ["1/1/20", "2/1/20", "1/1/23", "4/1/23", "5/6/23"]
     @IBOutlet weak var petName: UILabel!
     @IBOutlet weak var petImage: UIImageView!
@@ -26,6 +29,30 @@ class HomePageViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
     }
+    @IBAction func onMorningWalkClicked(_ sender: Any) {
+        morningWalk.setImage(UIImage(named: "walk_full"), for: .normal)
+    }
+    @IBAction func onAfternoonWalkClicked(_ sender: Any) {
+        afternoonWalk.setImage(UIImage(named: "walk_full"), for: .normal)
+    }
+    @IBAction func onEveningWalkClicked(_ sender: Any) {
+        eveningWalk.setImage(UIImage(named: "walk_full"), for: .normal)
+        
+    }
+    @IBAction func onBreakfastClicked(_ sender: Any) {
+        breakfast.setImage(UIImage(named: "bowl_full"), for: .normal)
+        
+    }
+    @IBAction func onSupperClicked(_ sender: Any) {
+        supper.setImage(UIImage(named: "bowl_full"), for: .normal)
+        
+    }
+    
+    
+    
+    
+    
+    
 }
 
 extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -50,5 +77,5 @@ extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataS
         let height = (collectionView.frame.size.height) / 2
         return CGSize(width: width, height: height)
     }
-    
+   
 }

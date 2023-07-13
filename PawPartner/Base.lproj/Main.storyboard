@@ -74,7 +74,10 @@
                                                     <constraint firstAttribute="height" constant="50" id="jY2-0m-6KD"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="walk_full"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="walk_empty"/>
+                                                <connections>
+                                                    <action selector="onMorningWalkClicked:" destination="AEG-YO-vdg" eventType="touchUpInside" id="2qj-Io-ddi"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -104,6 +107,9 @@
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="walk_empty"/>
+                                                <connections>
+                                                    <action selector="onAfternoonWalkClicked:" destination="AEG-YO-vdg" eventType="touchUpInside" id="aEn-97-Vm4"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -133,6 +139,9 @@
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="walk_empty"/>
+                                                <connections>
+                                                    <action selector="onEveningWalkClicked:" destination="AEG-YO-vdg" eventType="touchUpInside" id="ZAr-1n-Kdw"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -172,7 +181,10 @@
                                                     <constraint firstAttribute="height" constant="50" id="qKa-IE-QP8"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="bowl_full"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="bowl_empty"/>
+                                                <connections>
+                                                    <action selector="onBreakfastClicked:" destination="AEG-YO-vdg" eventType="touchUpInside" id="aVD-gk-FIB"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -202,6 +214,9 @@
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="bowl_empty"/>
+                                                <connections>
+                                                    <action selector="onSupperClicked:" destination="AEG-YO-vdg" eventType="touchUpInside" id="vCq-iL-60l"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -304,9 +319,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="Home Page" id="fOJ-dt-aaK"/>
                     <connections>
+                        <outlet property="afternoonWalk" destination="igR-b1-14L" id="mWv-L7-9cb"/>
+                        <outlet property="breakfast" destination="15a-Wb-ruL" id="iCm-hB-RBH"/>
                         <outlet property="collectionView" destination="EWN-Zc-fBK" id="Lrx-f9-ac4"/>
+                        <outlet property="eveningWalk" destination="GtR-4y-lQc" id="QZq-Zm-XNt"/>
+                        <outlet property="morningWalk" destination="n0N-G5-lVM" id="rJw-VN-Tg3"/>
                         <outlet property="petImage" destination="cg0-rk-tEP" id="JMj-ot-Szz"/>
                         <outlet property="petName" destination="EbT-Ol-7A6" id="HkN-4m-Hic"/>
+                        <outlet property="supper" destination="fdb-Xd-fkw" id="xCY-eS-7FK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1jr-9g-nHQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -324,18 +344,21 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XdS-1m-DcT">
                                 <rect key="frame" x="31.666666666666657" y="313.66666666666669" width="330" height="250.00000000000006"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uI2-va-tLh">
-                                        <rect key="frame" x="76" y="65" width="178" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uI2-va-tLh">
+                                        <rect key="frame" x="123.99999999999997" y="65" width="81.666666666666657" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="qkU-i3-3Zd"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
                                         <menu key="menu" id="03P-4g-bh2">
                                             <children>
                                                 <command title="Barber" id="lTw-mc-iV0"/>
                                                 <command title="Contest" id="2gN-7U-a67"/>
                                             </children>
                                         </menu>
-                                        <state key="normal" title="Pick your notification type"/>
+                                        <state key="normal" title="   Item   " image="chevron.down" catalog="system">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abu-Yd-Dai">
                                         <rect key="frame" x="25" y="185" width="100" height="35"/>
@@ -405,6 +428,7 @@
                     </view>
                     <connections>
                         <outlet property="alertView" destination="XdS-1m-DcT" id="KRi-cf-Igo"/>
+                        <outlet property="datePicker" destination="qFq-B4-aqd" id="fdq-2s-Wvg"/>
                         <outlet property="notificationPicker" destination="uI2-va-tLh" id="uzj-CP-kcK"/>
                     </connections>
                 </viewController>
@@ -585,7 +609,7 @@
     </scenes>
     <resources>
         <image name="bowl_empty" width="50" height="50"/>
-        <image name="bowl_full" width="50" height="50"/>
+        <image name="chevron.down" catalog="system" width="128" height="70"/>
         <image name="ic_plus" width="50" height="50"/>
         <image name="walk_empty" width="50" height="50"/>
         <image name="walk_full" width="50" height="50"/>
