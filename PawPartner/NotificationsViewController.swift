@@ -7,10 +7,10 @@
 
 import UIKit
 
-class NotificationsViewController: UIViewController {
+class NotificationsViewController: UIViewController,CustomAlertDelegate {
     
-    @IBOutlet weak var datePicker: NSLayoutConstraint!
-    @IBOutlet weak var dropDown: UIButton!
+    
+    
     @IBOutlet weak var notificationCollectionView: UICollectionView!
     let images: [String] = ["Barber", "Bath", "Contest", "Dental care", "Flea care"]
     let dates: [String] = ["1/1/20", "2/1/20", "1/1/23", "4/1/23", "5/6/23"]
@@ -18,14 +18,24 @@ class NotificationsViewController: UIViewController {
         super.viewDidLoad()
         notificationCollectionView.dataSource = self
         notificationCollectionView.delegate = self
-        
-        // Do any additional setup after loading the view.
+       
     }
-    @IBAction func onSaveClicked(_ sender: Any) {
+    @IBAction func onNewNotificationClicked(_ sender: Any) {
+        let customAlert = self.storyboard?.instantiateViewController(identifier: "CustomAlertViewController") as! CustomAlertViewController
+        customAlert.delegate = self
+        customAlert.modalPresentationStyle = .overCurrentContext
+        customAlert.providesPresentationContextTransitionStyle = true
+        customAlert.definesPresentationContext = true
+        customAlert.modalTransitionStyle = .crossDissolve
+        self.present(customAlert, animated: true, completion: nil)
     }
     
-    @IBAction func onCancelClicked(_ sender: Any) {
+    func onSaveClicked(type: String, date: Date) {
+
+        print(type)
+        print(date)
     }
+    
 }
 
     extension NotificationsViewController: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{

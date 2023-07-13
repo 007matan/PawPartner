@@ -16,6 +16,7 @@
 		FC8730232A5C506700370EEF /* HomePageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8730222A5C506700370EEF /* HomePageCollectionViewCell.swift */; };
 		FC8730252A5D826700370EEF /* NotificationsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8730242A5D826700370EEF /* NotificationsCollectionViewCell.swift */; };
 		FC8730272A5D82D900370EEF /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8730262A5D82D900370EEF /* NotificationsViewController.swift */; };
+		FDB264DF2A602F6F00AF2214 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB264DE2A602F6F00AF2214 /* CustomAlertViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		FC8730222A5C506700370EEF /* HomePageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC8730242A5D826700370EEF /* NotificationsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC8730262A5D82D900370EEF /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		FDB264DE2A602F6F00AF2214 /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				FC8730262A5D82D900370EEF /* NotificationsViewController.swift */,
 				FC298FF92A5AEAF4005AACEF /* HomePageViewController.swift */,
 				FC8730222A5C506700370EEF /* HomePageCollectionViewCell.swift */,
+				FDB264DE2A602F6F00AF2214 /* CustomAlertViewController.swift */,
 				FC298FFB2A5AEAF4005AACEF /* Main.storyboard */,
 				FC298FFE2A5AEAF4005AACEF /* Assets.xcassets */,
 				FC2990002A5AEAF4005AACEF /* LaunchScreen.storyboard */,
@@ -152,6 +155,7 @@
 				FC8730232A5C506700370EEF /* HomePageCollectionViewCell.swift in Sources */,
 				FC8730272A5D82D900370EEF /* NotificationsViewController.swift in Sources */,
 				FC298FF82A5AEAF4005AACEF /* SceneDelegate.swift in Sources */,
+				FDB264DF2A602F6F00AF2214 /* CustomAlertViewController.swift in Sources */,
 				FC8730252A5D826700370EEF /* NotificationsCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
