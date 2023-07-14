@@ -17,6 +17,8 @@
 		FC8730252A5D826700370EEF /* NotificationsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8730242A5D826700370EEF /* NotificationsCollectionViewCell.swift */; };
 		FC8730272A5D82D900370EEF /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8730262A5D82D900370EEF /* NotificationsViewController.swift */; };
 		FDB264DF2A602F6F00AF2214 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB264DE2A602F6F00AF2214 /* CustomAlertViewController.swift */; };
+		FDB264E12A617EB500AF2214 /* MyDogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB264E02A617EB500AF2214 /* MyDogsViewController.swift */; };
+		FDB264E32A617EEE00AF2214 /* MyDogsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB264E22A617EEE00AF2214 /* MyDogsCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		FC8730242A5D826700370EEF /* NotificationsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC8730262A5D82D900370EEF /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		FDB264DE2A602F6F00AF2214 /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
+		FDB264E02A617EB500AF2214 /* MyDogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDogsViewController.swift; sourceTree = "<group>"; };
+		FDB264E22A617EEE00AF2214 /* MyDogsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDogsCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,8 @@
 				FC298FFE2A5AEAF4005AACEF /* Assets.xcassets */,
 				FC2990002A5AEAF4005AACEF /* LaunchScreen.storyboard */,
 				FC2990032A5AEAF4005AACEF /* Info.plist */,
+				FDB264E02A617EB500AF2214 /* MyDogsViewController.swift */,
+				FDB264E22A617EEE00AF2214 /* MyDogsCollectionViewCell.swift */,
 			);
 			path = PawPartner;
 			sourceTree = "<group>";
@@ -156,7 +162,9 @@
 				FC8730272A5D82D900370EEF /* NotificationsViewController.swift in Sources */,
 				FC298FF82A5AEAF4005AACEF /* SceneDelegate.swift in Sources */,
 				FDB264DF2A602F6F00AF2214 /* CustomAlertViewController.swift in Sources */,
+				FDB264E32A617EEE00AF2214 /* MyDogsCollectionViewCell.swift in Sources */,
 				FC8730252A5D826700370EEF /* NotificationsCollectionViewCell.swift in Sources */,
+				FDB264E12A617EB500AF2214 /* MyDogsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
