@@ -436,16 +436,16 @@
             </objects>
             <point key="canvasLocation" x="-834.35114503816794" y="1483.8028169014085"/>
         </scene>
-        <!--View Controller-->
+        <!--Existing Dog Custom Alert View Controller-->
         <scene sceneID="t8i-xR-3rj">
             <objects>
-                <viewController id="pTu-aO-Wyb" sceneMemberID="viewController">
+                <viewController id="pTu-aO-Wyb" customClass="ExistingDogCustomAlertViewController" customModule="PawPartner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JuY-hL-iyx">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tYP-pD-gPs">
-                                <rect key="frame" x="31" y="326" width="330" height="201"/>
+                                <rect key="frame" x="31.666666666666657" y="326" width="330" height="201"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Existing dog" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDY-eM-DwV">
                                         <rect key="frame" x="100.33333333333331" y="25" width="129" height="21"/>
@@ -483,6 +483,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="gray" title="Cancel"/>
+                                        <connections>
+                                            <action selector="onCancelClicked:" destination="pTu-aO-Wyb" eventType="touchUpInside" id="d4w-va-bMU"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="syT-2Q-xPc">
                                         <rect key="frame" x="205" y="146" width="100" height="35"/>
@@ -492,6 +495,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="gray" title="Save"/>
+                                        <connections>
+                                            <action selector="onSaveClicked:" destination="pTu-aO-Wyb" eventType="touchUpInside" id="RuS-WC-UJo"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -519,21 +525,25 @@
                             <constraint firstItem="tYP-pD-gPs" firstAttribute="centerY" secondItem="SMW-cY-utb" secondAttribute="centerY" constant="-12" id="S3C-6Z-f0l"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="alertView" destination="tYP-pD-gPs" id="9AE-YC-S7d"/>
+                        <outlet property="idTextField" destination="U4D-tx-hTY" id="Os6-hi-N20"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wDR-Sz-XBk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="67.938931297709928" y="1496.4788732394368"/>
         </scene>
-        <!--View Controller-->
+        <!--New Dog Custom Alert View Controller-->
         <scene sceneID="qH8-Xl-17h">
             <objects>
-                <viewController id="THC-e4-QJW" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewDogCustomAlertViewController" id="THC-e4-QJW" customClass="NewDogCustomAlertViewController" customModule="PawPartner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w7S-m6-nrA">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ObZ-T2-6uT">
-                                <rect key="frame" x="21" y="239" width="350" height="374"/>
+                                <rect key="frame" x="21.666666666666657" y="239" width="350" height="374"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add new dog" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwz-ar-8Cn">
                                         <rect key="frame" x="124.33333333333331" y="25" width="101" height="19.666666666666671"/>
@@ -567,6 +577,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="tinted" title="Choose image"/>
+                                        <connections>
+                                            <action selector="onImageClicked:" destination="THC-e4-QJW" eventType="touchUpInside" id="Lul-Pm-teH"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Sj-fK-E0A">
                                         <rect key="frame" x="20" y="318.66666666666663" width="100" height="35"/>
@@ -576,6 +589,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="gray" title="Cancel"/>
+                                        <connections>
+                                            <action selector="onCancelClicked:" destination="THC-e4-QJW" eventType="touchUpInside" id="Hdu-Pu-kOF"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqh-ax-y6E">
                                         <rect key="frame" x="230" y="318.66666666666663" width="100" height="35"/>
@@ -585,6 +601,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="gray" title="Save"/>
+                                        <connections>
+                                            <action selector="onSaveClicked:" destination="THC-e4-QJW" eventType="touchUpInside" id="cQ6-4Y-Dfa"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -615,6 +634,10 @@
                             <constraint firstItem="ObZ-T2-6uT" firstAttribute="centerY" secondItem="5nL-v6-08t" secondAttribute="centerY" constant="-12.5" id="ozD-Kp-wHD"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="alertView" destination="ObZ-T2-6uT" id="J3P-Wg-ljr"/>
+                        <outlet property="nameTextField" destination="cDt-Vp-FeV" id="wid-1h-Pq6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lCM-fO-Qom" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

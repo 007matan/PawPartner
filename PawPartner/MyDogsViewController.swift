@@ -22,6 +22,12 @@ class MyDogsViewController: UIViewController {
     }
     
     @IBAction func onNewDogClicked(_ sender: Any) {
+        let customAlert = self.storyboard?.instantiateViewController(identifier: "NewDogCustomAlertViewController") as! NewDogCustomAlertViewController
+        customAlert.delegate = self
+        customAlert.modalPresentationStyle = .overCurrentContext
+        customAlert.providesPresentationContextTransitionStyle = true
+        customAlert.modalTransitionStyle = .crossDissolve
+        self.present(customAlert, animated: true, completion: nil)
     }
     
     @IBAction func onAddDogClicked(_ sender: Any) {
@@ -77,4 +83,12 @@ extension UIView{
         }
         return nil
     }
+}
+
+extension MyDogsViewController: NewDogAlertDelegate{
+    func onSaveClicked(name: String) {
+        print(name)
+    }
+    
+    
 }
