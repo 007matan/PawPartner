@@ -74,6 +74,7 @@ class CustomAlertViewController: UIViewController {
     @IBAction func onSaveClicked(_ sender: Any) {
         if(self.selectedType != "" && datePicker.date >= Date()){
             delegate?.onSaveClicked(type: self.selectedType, date: datePicker.date)
+            self.dismiss(animated: true, completion: nil)
         }
         
     }
