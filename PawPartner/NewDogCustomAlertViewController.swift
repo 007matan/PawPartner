@@ -58,7 +58,9 @@ class NewDogCustomAlertViewController: UIViewController, PHPickerViewControllerD
         let name = nameTextField.text ?? ""
         if(name != "" && !name.isEmpty){
             delegate?.onSaveClicked(name: name, image: dogImage!)
-            self.dismiss(animated: true, completion: nil)        }
+            self.dismiss(animated: true, completion: nil)
+            //print(imageView)
+        }
         
     }
 }

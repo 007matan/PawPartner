@@ -10,11 +10,11 @@ import UIKit
 
 class Dog {
     var id: UUID
-    var image: UIImage
+    var image: String
     var name: String
     var notifications: [DogNotification]
     
-    init(image: UIImage, name: String, notifications: [DogNotification]) {
+    init(image: String, name: String, notifications: [DogNotification]) {
         self.id = UUID()
         self.image = image
         self.name = name

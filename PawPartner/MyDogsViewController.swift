@@ -14,12 +14,11 @@ class MyDogsViewController: UIViewController {
     let images: [String] = ["Bath", "Training", "Contest"]
     let id: [String] = ["1", "2","3"]
     
-    let fireBaseManager = FirebaseManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         myDogsCollectionView.dataSource = self
         myDogsCollectionView.delegate = self
-        
     }
     
     @IBAction func onNewDogClicked(_ sender: Any) {
@@ -95,7 +94,8 @@ extension UIView{
 
 extension MyDogsViewController: NewDogAlertDelegate{
     func onSaveClicked(name: String, image: UIImage) {
-        fireBaseManager.writeData(data: "name")
+        let dog = Dog(image: "", name: name, notifications: [])
+        DatabaseManager().addNewDog(dog: dog, image: image)
         print(name)
         print(image)
     }
