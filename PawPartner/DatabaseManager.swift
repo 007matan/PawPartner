@@ -15,6 +15,12 @@ final class DatabaseManager {
     
 
     
+    func parseDateFromString(_ dateString: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Modify the date format according to your actual date string format
+        
+        return dateFormatter.date(from: dateString)
+    }
     public func addNotification(notification: DogNotification){
         // Convert DogNotification properties to compatible types
         let notificationDict: [String: Any] = [
@@ -37,12 +43,12 @@ final class DatabaseManager {
         checkDogExists(withID: id) { exist in
             if exist {
                 //add dog to user
+                self.database.child("Users").child("Dogs").child(id).setValue(id)
             }
             else{
-                
+                print("Dog doesn't exist on Firebase")
             }
         }
-        
     }
     
     func checkDogExists(withID id: String, completion: @escaping (Bool) -> Void) {
@@ -96,5 +102,5 @@ final class DatabaseManager {
                 }
             }
         }
-    
+   
 }
