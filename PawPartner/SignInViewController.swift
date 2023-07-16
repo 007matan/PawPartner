@@ -28,8 +28,19 @@ class SignInViewController: UIViewController {
                     switch result {
                     case .success(let user):
                         // retrive user data
-                        
-                        
+                        DatabaseManager().getUser(id: user.id){ user in
+                            if let user = user {
+                                
+                                // User object is available
+                                print("User ID: \(user.id)")
+                                print("Name: \(user.name)")
+                                print("Email: \(user.email)")
+                                // Access other properties and perform actions with the user object
+                            } else {
+                                // Unable to fetch the user or user does not exist
+                                print("Unable to fetch user")
+                            }
+                        }
                         // goto main page
                         if let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "TabViewControllerID") as? UITabBarController {
                             tabBarController.modalPresentationStyle = .fullScreen
@@ -59,5 +70,10 @@ class SignInViewController: UIViewController {
         let emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         return emailPredicate.evaluate(with: email)
+    }
+    
+    
+    func saveUserToUD(user:User){
+        
     }
 }

@@ -9,15 +9,25 @@ import Foundation
 import UIKit
 
 class Dog {
-    var id: UUID
+    var id: String
     var image: String
     var name: String
     var notifications: [DogNotification]
     var walking: [Bool]
     var meal: [Bool]
     
+    init(id: String, image: String, name: String, notifications: [DogNotification], walking: [Bool], meal: [Bool]) {
+        self.id = id
+        self.image = image
+        self.name = name
+        self.notifications = notifications
+        self.walking = walking
+        self.meal = meal
+    }
+    
+    
     init(image: String, name: String, notifications: [DogNotification]) {
-        self.id = UUID()
+        self.id = UUID().uuidString
         self.image = image
         self.name = name
         self.notifications = notifications
