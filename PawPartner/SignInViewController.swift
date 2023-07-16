@@ -18,10 +18,45 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func onClickedSignIn(_ sender: UIButton) {
+        let email_input = email.text ?? "null"
+        let password_input = password.text ?? "null"
+        if(email_input == "null" || password_input == "null"){
+            print("Missing on or more arguments")
+        }else{
+            if(isValidEmail(email: email_input)){
+                AuthManager().signIn(email: email_input, password: password_input) { result in
+                    switch result {
+                    case .success(let user):
+                        // retrive user data
+                        
+                        // goto main page
+                        if let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "TabViewControllerID") as? UITabBarController {
+                            tabBarController.modalPresentationStyle = .fullScreen
+                            self.present(tabBarController, animated: true, completion: nil)
+                        }
+                        print("User signed in:")
+                        print("ID: \(user.id)")
+                        print("Name: \(user.name)")
+                        print("Email: \(user.email)")
+                    case .failure(let error):
+                        print("Sign-in error: \(error.localizedDescription)")
+                    }
+                    
+                }
+            }
+        }
     }
     
     
     @IBAction func onClickedSignUp(_ sender: Any) {
+        let destinationVC = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+        self.present(destinationVC, animated: true, completion: nil)
+
     }
     
+    func isValidEmail(email: String) -> Bool {
+        let emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
+    }
 }

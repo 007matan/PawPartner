@@ -7,13 +7,13 @@
 import Foundation
 import FirebaseDatabase
 import FirebaseStorage
+import FirebaseAuth
 import UIKit
 
 final class DatabaseManager {
     static let shared = DatabaseManager()
     private let database = Database.database().reference()
     
-
     
     func parseDateFromString(_ dateString: String) -> Date? {
         let dateFormatter = DateFormatter()
@@ -21,6 +21,20 @@ final class DatabaseManager {
         
         return dateFormatter.date(from: dateString)
     }
+    
+    func addUser(user: User, completion: @escaping (Bool, Error?) -> Void) {
+        // Set the user's data at the user reference path
+        database.child("Users").child(user.id.uuidString).child("name").setValue(user.name) { error, _ in
+            if let error = error {
+                completion(false, error)
+                print("Failed to add user to the Realtime Database: \(error.localizedDescription)")
+            } else {
+                completion(true, nil)
+                print("User added successfully to the Realtime Database")
+            }
+        }
+    }
+
     public func addNotification(notification: DogNotification){
         // Convert DogNotification properties to compatible types
         let notificationDict: [String: Any] = [
