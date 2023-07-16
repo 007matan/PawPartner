@@ -22,9 +22,12 @@ final class DatabaseManager {
         return dateFormatter.date(from: dateString)
     }
     
+    
+    
+    
     func addUser(user: User, completion: @escaping (Bool, Error?) -> Void) {
         // Set the user's data at the user reference path
-        database.child("Users").child(user.id.uuidString).child("name").setValue(user.name) { error, _ in
+        database.child("Users").child(user.id).child("name").setValue(user.name) { error, _ in
             if let error = error {
                 completion(false, error)
                 print("Failed to add user to the Realtime Database: \(error.localizedDescription)")
@@ -34,7 +37,7 @@ final class DatabaseManager {
             }
         }
     }
-
+    
     public func addNotification(notification: DogNotification){
         // Convert DogNotification properties to compatible types
         let notificationDict: [String: Any] = [
