@@ -154,6 +154,7 @@ final class DatabaseManager {
     public func addNotification(notification: DogNotification){
         // Convert DogNotification properties to compatible types
         let notificationDict: [String: Any] = [
+            "id": notification.id,
             "type": notification.type,
             "date": notification.date.timeIntervalSince1970
         ]
@@ -173,7 +174,9 @@ final class DatabaseManager {
         checkDogExists(withID: id) { exist in
             if exist {
                 //add dog to user
-                self.database.child("Users").child("Dogs").child(id).setValue(id)
+                //self.database.child("Users").child("Dogs").child(id).setValue(id)
+                self.database.child("Users").child(Auth.auth().currentUser!.uid).child("dogs").child(id).setValue(id)
+                
             }
             else{
                 print("Dog doesn't exist on Firebase")
@@ -219,7 +222,10 @@ final class DatabaseManager {
                                         // Handle the error
                                         print("Error adding dog to Firebase: \(error)")
                                     } else {
-                                        // Dog was successfully added
+                                         //Dog was successfully added
+                                        self.database.child("Users").child(Auth.auth().currentUser!.uid).child("dogs").child(dog.id).setValue(dog.id)
+                                        //print(Auth.auth().currentUser!.uid)
+                                        
                                         print("Dog added to Firebase")
                                     }
                                 }

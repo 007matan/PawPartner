@@ -28,12 +28,13 @@
 		FCFA75262A63042A00AE342D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = FCFA75252A63042A00AE342D /* FirebaseStorage */; };
 		FCFA752A2A641E9100AE342D /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA75292A641E9100AE342D /* SignInViewController.swift */; };
 		FCFA752C2A641EA100AE342D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA752B2A641EA100AE342D /* SignUpViewController.swift */; };
+		FCFA75302A69451100AE342D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCFA752F2A69451100AE342D /* GoogleService-Info.plist */; };
+		FCFA75322A694D1F00AE342D /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA75312A694D1F00AE342D /* UserDefaultsManager.swift */; };
 		FDB264DF2A602F6F00AF2214 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB264DE2A602F6F00AF2214 /* CustomAlertViewController.swift */; };
 		FDB264E12A617EB500AF2214 /* MyDogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB264E02A617EB500AF2214 /* MyDogsViewController.swift */; };
 		FDB264E32A617EEE00AF2214 /* MyDogsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB264E22A617EEE00AF2214 /* MyDogsCollectionViewCell.swift */; };
 		FDB264E52A61A1B400AF2214 /* NewDogCustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB264E42A61A1B400AF2214 /* NewDogCustomAlertViewController.swift */; };
 		FDB264E72A61A1D700AF2214 /* ExistingDogCustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB264E62A61A1D700AF2214 /* ExistingDogCustomAlertViewController.swift */; };
-		FDB264E92A64287700AF2214 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FDB264E82A64287700AF2214 /* GoogleService-Info.plist */; };
 		FDB264ED2A64338500AF2214 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB264EC2A64338500AF2214 /* AuthManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,12 +56,13 @@
 		FCFA751C2A63032400AE342D /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		FCFA75292A641E9100AE342D /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		FCFA752B2A641EA100AE342D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		FCFA752F2A69451100AE342D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Users/student11/Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FCFA75312A694D1F00AE342D /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		FDB264DE2A602F6F00AF2214 /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		FDB264E02A617EB500AF2214 /* MyDogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDogsViewController.swift; sourceTree = "<group>"; };
 		FDB264E22A617EEE00AF2214 /* MyDogsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDogsCollectionViewCell.swift; sourceTree = "<group>"; };
 		FDB264E42A61A1B400AF2214 /* NewDogCustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDogCustomAlertViewController.swift; sourceTree = "<group>"; };
 		FDB264E62A61A1D700AF2214 /* ExistingDogCustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistingDogCustomAlertViewController.swift; sourceTree = "<group>"; };
-		FDB264E82A64287700AF2214 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FDB264EC2A64338500AF2214 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,15 +117,16 @@
 				FDB264E02A617EB500AF2214 /* MyDogsViewController.swift */,
 				FDB264E22A617EEE00AF2214 /* MyDogsCollectionViewCell.swift */,
 				FDB264E42A61A1B400AF2214 /* NewDogCustomAlertViewController.swift */,
+				FCFA752F2A69451100AE342D /* GoogleService-Info.plist */,
 				FDB264E62A61A1D700AF2214 /* ExistingDogCustomAlertViewController.swift */,
 				FCFA750F2A62DDED00AE342D /* User.swift */,
 				FCFA75112A62DEB800AE342D /* Dog.swift */,
-				FDB264E82A64287700AF2214 /* GoogleService-Info.plist */,
 				FCFA75132A62DF4100AE342D /* DogNotification.swift */,
 				FCFA751C2A63032400AE342D /* DatabaseManager.swift */,
 				FCFA75292A641E9100AE342D /* SignInViewController.swift */,
 				FCFA752B2A641EA100AE342D /* SignUpViewController.swift */,
 				FDB264EC2A64338500AF2214 /* AuthManager.swift */,
+				FCFA75312A694D1F00AE342D /* UserDefaultsManager.swift */,
 			);
 			path = PawPartner;
 			sourceTree = "<group>";
@@ -205,7 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC2990022A5AEAF4005AACEF /* LaunchScreen.storyboard in Resources */,
-				FDB264E92A64287700AF2214 /* GoogleService-Info.plist in Resources */,
+				FCFA75302A69451100AE342D /* GoogleService-Info.plist in Resources */,
 				FC298FFF2A5AEAF4005AACEF /* Assets.xcassets in Resources */,
 				FC298FFD2A5AEAF4005AACEF /* Main.storyboard in Resources */,
 			);
@@ -223,6 +226,7 @@
 				FC298FF62A5AEAF4005AACEF /* AppDelegate.swift in Sources */,
 				FDB264E52A61A1B400AF2214 /* NewDogCustomAlertViewController.swift in Sources */,
 				FC8730232A5C506700370EEF /* HomePageCollectionViewCell.swift in Sources */,
+				FCFA75322A694D1F00AE342D /* UserDefaultsManager.swift in Sources */,
 				FC8730272A5D82D900370EEF /* NotificationsViewController.swift in Sources */,
 				FCFA752C2A641EA100AE342D /* SignUpViewController.swift in Sources */,
 				FC298FF82A5AEAF4005AACEF /* SceneDelegate.swift in Sources */,

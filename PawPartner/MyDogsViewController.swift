@@ -102,6 +102,7 @@ extension MyDogsViewController: NewDogAlertDelegate{
 }
 extension MyDogsViewController: ExistingDogAlertDelegate{
     func onSaveClicked(id: String) {
+        DatabaseManager().addExistingDog(id: id)
         print(id)
     }
 }

@@ -30,7 +30,17 @@ class SignInViewController: UIViewController {
                         // retrive user data
                         DatabaseManager().getUser(id: user.id){ user in
                             if let user = user {
-                                
+                               // let jsonString = user.encodeToJson()
+                               // let defaultsManager = UserDefaultsManager.shared
+
+                                        // Save data using UserDefaultsManager methods
+                               // defaultsManager.saveUser(jsonString)
+                               // if let readedJson = defaultsManager.getUser(){
+                                    
+                                 //   if let readedUser2 = //User.decodeFromJson(jsonString: //readedJson){
+                                //        print("Ronius: \(readedUser2)")
+                                //    }
+                                //}
                                 // User object is available
                                 print("User ID: \(user.id)")
                                 print("Name: \(user.name)")

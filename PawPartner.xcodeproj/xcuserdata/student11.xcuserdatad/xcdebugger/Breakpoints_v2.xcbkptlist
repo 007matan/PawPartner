@@ -3,4 +3,54 @@
    uuid = "F18CB17F-1A22-492A-A115-913EC25F2019"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "22578EAD-064E-4696-BCB3-A764DF0E58C3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PawPartner/SignInViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "onClickedSignIn(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "22578EAD-064E-4696-BCB3-A764DF0E58C3 - d98f0ba38ceb5a0b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PawPartner.SignInViewController.onClickedSignIn(__C.UIButton) -&gt; ()"
+                  moduleName = "PawPartner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Students/PawPartner/PawPartner/SignInViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "564">
+               </Location>
+               <Location
+                  uuid = "22578EAD-064E-4696-BCB3-A764DF0E58C3 - d98f0ba38ceb5a0b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PawPartner.SignInViewController.onClickedSignIn(__C.UIButton) -&gt; ()"
+                  moduleName = "PawPartner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Students/PawPartner/PawPartner/SignInViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "776">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
