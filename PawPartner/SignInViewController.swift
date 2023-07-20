@@ -30,7 +30,9 @@ class SignInViewController: UIViewController {
                         // retrive user data
                         DatabaseManager().getUser(id: user.id){ user in
                             if let user = user {
-                               // let jsonString = user.encodeToJson()
+                               //let jsonString = user.encodeToJson()
+                                //print("json: \(jsonString)")
+                                print("cc")
                                // let defaultsManager = UserDefaultsManager.shared
 
                                         // Save data using UserDefaultsManager methods
@@ -42,9 +44,6 @@ class SignInViewController: UIViewController {
                                 //    }
                                 //}
                                 // User object is available
-                                print("User ID: \(user.id)")
-                                print("Name: \(user.name)")
-                                print("Email: \(user.email)")
                                 // Access other properties and perform actions with the user object
                             } else {
                                 // Unable to fetch the user or user does not exist

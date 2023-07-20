@@ -39,6 +39,7 @@ final class DatabaseManager {
 
     
     func getDog(id: String, completion: @escaping (Dog?) -> Void) {
+        print("A:\(id)")
         database.child("Dogs").child(id).observeSingleEvent(of: .value, with: { snapshot in
             if let dogData = snapshot.value as? [String: Any],
                let id = dogData["id"] as? String,
@@ -48,7 +49,11 @@ final class DatabaseManager {
                let walking = dogData["walking"] as? [Bool],
                let meal = dogData["meal"] as? [Bool] {
                 var notificationList:[DogNotification] = []
+                print("B")
                 for notification in notifications {
+                    if notification.isEmpty{
+                        continue
+                    }
                     self.getDogNotification(id: notification){ notification in
                         if let notification = notification {
                             notificationList.append(notification)
@@ -70,21 +75,27 @@ final class DatabaseManager {
     
     
     func getUser(id: String, completion: @escaping (User?) -> Void) {
+        print("1")
+        //var dogList: [Dog] = []
         database.child("Users").child(id).observeSingleEvent(of: .value, with: { snapshot in
             if let userData = snapshot.value as? [String: Any],
-               let id = userData["id"] as? String,
-               let name = userData["name"] as? String,
+               let dogs = userData["dogs"] as? [String],
                let email = userData["email"] as? String,
-               let password = userData["password"] as? String,
-               let dogs = userData["dogs"] as? [String] {
+               let id = userData["id"] as? String,
+               let name = userData["name"] as? String {
                 var dogList: [Dog] = []
                 let dispatchGroup = DispatchGroup() // Used to wait for all dogs to be fetched
-                
+                print("2")
                 for dog in dogs {
+                    if dog.isEmpty{
+                        continue
+                    }
+                    print("3: \(dog)")
                     dispatchGroup.enter()
                     self.getDog(id: dog) { dog in
                         if let dog = dog {
                             dogList.append(dog)
+                            //print("Dog: -> \(dog)")
                         } else {
                             print("Dog does not exist")
                         }
@@ -93,7 +104,7 @@ final class DatabaseManager {
                 }
                 
                 dispatchGroup.notify(queue: .main) {
-                    let user = User(id: id, name: name, email: email, password: password, dogs: dogList)
+                    let user = User(id: id, name: name, email: email, dogs: dogList)
                     completion(user)
                 }
             } else {
@@ -102,45 +113,15 @@ final class DatabaseManager {
         })
     }
 
-    
-    
-    
-    
-
-    
-    
-    func getUser2(id:String){
-            database.child("Users").child(id).observeSingleEvent(of: .value, with: { snapshot in
-                if let userData = snapshot.value as? [String: Any],
-                   let id = userData["id"] as? String,
-                   let name = userData["name"] as? String,
-                   let email = userData["email"] as? String,
-                   let password = userData["password"] as? String,
-                   let dogs = userData["dogs"] as? [String] {
-                    var dogList: [Dog] = []
-                    for dog in dogs{
-                        self.getDog(id: dog){ dog in
-                            if let dog = dog {
-                                dogList.append(dog)
-                            } else {
-                                print("dog not exist")
-                            }
-                        }
-                        
-                    }
-                    
-                
-                       let user = User(id: id, name: name, email: email, password: password, dogs: dogList)
-                       // Do something with the user object
-                       // e.g., pass it to a completion handler, update UI, etc.
-                }
-            })
-
-        }
-    
     func addUser(user: User, completion: @escaping (Bool, Error?) -> Void) {
         // Set the user's data at the user reference path
-        database.child("Users").child(user.id).child("name").setValue(user.name) { error, _ in
+        let userDict:[String:Any] = [
+            "id": user.id,
+            "name": user.name,
+            "email": user.email,
+            "dogs": [""]
+        ]
+        database.child("Users").child(user.id).setValue(userDict) { error, _ in
             if let error = error {
                 completion(false, error)
                 print("Failed to add user to the Realtime Database: \(error.localizedDescription)")
@@ -165,6 +146,7 @@ final class DatabaseManager {
                 print("Error writing data to Firebase: \(error)")
             } else {
                 // Data was successfully written
+                
                 print("Data written to Firebase")
             }
         }
@@ -195,11 +177,16 @@ final class DatabaseManager {
         let storageRef = Storage.storage().reference()
             // Convert Dog properties to compatible types
             let dogDict: [String: Any] = [
-                "name": dog.name
+                "id": dog.id,
+                "name": dog.name,
+                "image": dog.image,
+                "meal": dog.meal,
+                "walking": dog.walking,
+                "notifications": [""]
             ]
             
             // Generate a unique ID for the dog in the Firebase Realtime Database
-            let dogRef = database.child("Dogs").child(dog.id)
+        let dogRef = database.child("Dogs").child(dog.id)
             
             // Upload the image to Firebase Storage
         let imageRef = storageRef.child("dog_images/\(String(describing: dogRef.key)).jpg")
@@ -223,7 +210,15 @@ final class DatabaseManager {
                                         print("Error adding dog to Firebase: \(error)")
                                     } else {
                                          //Dog was successfully added
-                                        self.database.child("Users").child(Auth.auth().currentUser!.uid).child("dogs").child(dog.id).setValue(dog.id)
+                                        self.database.child("Users").child(Auth.auth().currentUser!.uid).child("dogs").observeSingleEvent(of: .value, with: { snapshot in
+                                            if let list = snapshot.value as? [String]{
+                                                var dogList: [String] = []
+                                                dogList.append(contentsOf: list)
+                                                dogList.append(dog.id)
+                                                self.database.child("Users").child(Auth.auth().currentUser!.uid).child("dogs").setValue(dogList)
+                                            }
+                                        })
+                                        //self.database.child("Users").child(Auth.auth().currentUser!.uid).child("dogs").child(dog.id).setValue(dog.id)
                                         //print(Auth.auth().currentUser!.uid)
                                         
                                         print("Dog added to Firebase")

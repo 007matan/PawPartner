@@ -11,14 +11,12 @@ class User: Codable{
     var id: String
     var name: String
     var email: String
-    var password: String
     var dogs: [Dog]
     
-    init(id: String, name: String, email: String, password: String, dogs: [Dog]) {
+    init(id: String, name: String, email: String, dogs: [Dog]) {
         self.id = id
         self.name = name
         self.email = email
-        self.password = password
         self.dogs = dogs
     }
     

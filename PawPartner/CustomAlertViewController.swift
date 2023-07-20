@@ -17,7 +17,9 @@ class CustomAlertViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var notificationPicker: UIButton!
+    @IBOutlet weak var dogPicker: UIButton!
     var selectedType:String = ""
+    var selectedDog:String = ""
     var delegate:CustomAlertDelegate? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
