@@ -69,8 +69,8 @@ final class DatabaseManager {
                 }
                 
             
-                   let dog = Dog(id: id, image: image, name: name, notifications: notificationList, walking: walking, meal: meal)
-                   completion(dog)
+                let dog = Dog(id: id, image: image, name: name, notifications: notificationList, walking: walking, meal: meal)
+                completion(dog)
             } else {
                 completion(nil) // Dog not found or data structure mismatch
             }

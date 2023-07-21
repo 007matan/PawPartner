@@ -5,18 +5,31 @@
 //  Created by Student10 on 14/07/2023.
 //
 
+
 import UIKit
+import Kingfisher
 
 class MyDogsViewController: UIViewController {
 
     @IBOutlet weak var myDogsCollectionView: UICollectionView!
-    let names: [String] = ["Hipper", "Rey", "Bono"]
-    let images: [String] = ["Bath", "Training", "Contest"]
-    let id: [String] = ["1", "2","3"]
+    var names: [String] = []
+    var images: [String] = []
+    var id: [String] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let readedJson = UserDefaultsManager.shared.getUser(){
+            if let readedUser2 = User.decodeFromJson(jsonString: readedJson){
+                for dog in readedUser2.dogs{
+                    self.names.append(dog.name)
+                    self.images.append(dog.image)
+                    self.id.append(dog.id)
+                }
+            }
+        }
+        
+        
         myDogsCollectionView.dataSource = self
         myDogsCollectionView.delegate = self
     }
@@ -50,7 +63,14 @@ extension MyDogsViewController: UICollectionViewDelegate,UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MyDogsCollectionViewCell
         cell.name.text = names[indexPath.row]
-        cell.image.image = UIImage(named: images[indexPath.row])
+        let url = URL(string: images[indexPath.row])
+        cell.image.kf.setImage(with: url)
+        let processor = DownsamplingImageProcessor(size: cell.image.bounds.size) |> RoundCornerImageProcessor(cornerRadius: cell.image.bounds.height / 2)
+        KF.url(url)
+            .setProcessor(processor)
+            .loadDiskFileSynchronously()
+            .fade(duration: 0.25)
+            .set(to: cell.image)
         cell.copyButton.addTarget(self, action: #selector(copyText(_:)), for: .touchUpInside)
         return cell
     }
@@ -105,4 +125,19 @@ extension MyDogsViewController: ExistingDogAlertDelegate{
         DatabaseManager().addExistingDog(id: id)
         print(id)
     }
+}
+
+@IBDesignable extension UIView {
+    
+    @IBInspectable var cornerRadius: CGFloat {
+        get { return layer.cornerRadius }
+        set {
+              layer.cornerRadius = newValue
+
+              // If masksToBounds is true, subviews will be
+              // clipped to the rounded corners.
+              layer.masksToBounds = (newValue > 0)
+        }
+    }
+    
 }

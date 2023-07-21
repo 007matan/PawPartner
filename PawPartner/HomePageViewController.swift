@@ -15,6 +15,7 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var supper: UIButton!
     @IBOutlet weak var breakfast: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    var user: User?
     let images: [String] = ["Barber", "Contest", "Training", "Bath", "Dental care"]
     let names: [String] = ["Barber", "Contest", "Training", "Bath", "Dental care"]
     let dates: [String] = ["1/1/20", "2/1/20", "1/1/23", "4/1/23", "5/6/23"]
@@ -23,6 +24,11 @@ class HomePageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        if let readedJson = UserDefaultsManager.shared.getUser(){
+            if let readedUser = User.decodeFromJson(jsonString: readedJson){
+                user = readedUser
+            }
+        }
         petImage.backgroundColor = .blue
         petImage.layer.masksToBounds = true
         petImage.layer.cornerRadius = petImage.frame.height / 2
@@ -66,10 +72,6 @@ extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataS
         cell.imageView.image = UIImage(named: images[indexPath.row])
         cell.dateLabel.text = dates[indexPath.row]
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = names[indexPath.row]
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -12,10 +12,30 @@ class NotificationsViewController: UIViewController,CustomAlertDelegate {
     
     
     @IBOutlet weak var notificationCollectionView: UICollectionView!
-    let images: [String] = ["Barber", "Bath", "Contest", "Dental care", "Flea care"]
-    let dates: [String] = ["1/1/20", "2/1/20", "1/1/23", "4/1/23", "5/6/23"]
+    var images: [String] = []
+    var dates: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let readedJson = UserDefaultsManager.shared.getUser(){
+            print("---A---")
+            if let readedUser = User.decodeFromJson(jsonString: readedJson){
+                print("---B---")
+                for dog in readedUser.dogs{
+                    print("---C---\(dog.notifications.count)")
+                    for n in dog.notifications{
+                        //notifications.append(n)
+                        print("!!!!!!!!!!!")
+                        print("type:\(n.type)----date:\(n.date)")
+                        self.images.append(n.type)
+                        //self.dates.append(DateFormatter().string(from: n.date))
+                    }
+                }
+            }
+        }
+        
+        
         notificationCollectionView.dataSource = self
         notificationCollectionView.delegate = self
        
