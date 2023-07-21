@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CustomAlertDelegate{
-    func onSaveClicked(type:String, date:Date)
+    func onSaveClicked(type:String, date:Date, dogId: String)
 
 }
 
@@ -20,12 +20,39 @@ class CustomAlertViewController: UIViewController {
     @IBOutlet weak var dogPicker: UIButton!
     var selectedType:String = ""
     var selectedDog:String = ""
+    var dogs: [Dog] = []
     var delegate:CustomAlertDelegate? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let readedJson = UserDefaultsManager.shared.getUser(){
+            if let readedUser2 = User.decodeFromJson(jsonString: readedJson){
+                dogs = readedUser2.dogs
+            }
+        }
         setNitificationPickerMenu()
+        setDogsPickerMenu()
         
     }
+    
+    func setDogsPickerMenu(){
+        var children: [UIAction] = []
+        
+        for dog in dogs{
+            let action = UIAction(title: dog.name, handler: { _ in
+                self.selectedDog = dog.id
+                self.dogPicker.setTitle(dog.name, for: .normal)
+            })
+            children.append(action)
+        }
+        dogPicker.menu = UIMenu(title:"Pick Dog", options: .displayInline, children: children)
+    }
+    
+    
+    
+    
+    
+    
+    
     func setNitificationPickerMenu(){
 
         notificationPicker.menu = UIMenu(title:"Pick notification type",options: .displayInline, children: [
@@ -74,8 +101,8 @@ class CustomAlertViewController: UIViewController {
     
 
     @IBAction func onSaveClicked(_ sender: Any) {
-        if(self.selectedType != "" && datePicker.date >= Date()){
-            delegate?.onSaveClicked(type: self.selectedType, date: datePicker.date)
+        if(self.selectedType != "" && datePicker.date >= Date() && self.selectedDog != ""){
+            delegate?.onSaveClicked(type: self.selectedType, date: datePicker.date, dogId: self.selectedDog)
             self.dismiss(animated: true, completion: nil)
         }
         

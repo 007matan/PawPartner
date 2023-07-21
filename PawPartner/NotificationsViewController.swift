@@ -30,9 +30,9 @@ class NotificationsViewController: UIViewController,CustomAlertDelegate {
         self.present(customAlert, animated: true, completion: nil)
     }
     
-    func onSaveClicked(type: String, date: Date) {
-        var dogNotification = DogNotification(type: type, date: date)
-        DatabaseManager().addNotification(notification: dogNotification)
+    func onSaveClicked(type: String, date: Date, dogId: String) {
+        let dogNotification = DogNotification(type: type, date: date)
+        DatabaseManager().addNotification(notification: dogNotification, dogId: dogId)
         print(type)
         print(date)
     }

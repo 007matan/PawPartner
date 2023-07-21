@@ -15,20 +15,22 @@ final class DatabaseManager {
     private let database = Database.database().reference()
     
     
-    func parseDateFromString(_ dateString: String) -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Modify the date format according to your actual date string format
-        
-        return dateFormatter.date(from: dateString)
+    func dateFromUnixTimestampString(_ unixTimestampString: String) -> Date? {
+        guard let unixTimestamp = TimeInterval(unixTimestampString) else {
+            // Invalid input, return nil
+            return nil
+        }
+        return Date(timeIntervalSince1970: unixTimestamp)
     }
+    
     
     func getDogNotification(id: String, completion: @escaping (DogNotification?) -> Void) {
         database.child("Notifications").child(id).observeSingleEvent(of: .value, with: { snapshot in
             if let notificationData = snapshot.value as? [String: Any],
                let id = notificationData["id"] as? String,
                let type = notificationData["type"] as? String,
-               let dateString = notificationData["date"] as? String,
-               let date = self.parseDateFromString(dateString) { // Convert dateString to Date
+               let dateString = notificationData["date"] as? Int,
+               let date = self.dateFromUnixTimestampString(String(dateString)) { // Convert dateString to Date
                 let dogNotification = DogNotification(id: id, type: type, date: date)
                    completion(dogNotification)
             } else {
@@ -54,9 +56,11 @@ final class DatabaseManager {
                     if notification.isEmpty{
                         continue
                     }
+                    print("not[i]: \(notification)")
                     self.getDogNotification(id: notification){ notification in
                         if let notification = notification {
                             notificationList.append(notification)
+                            print("found not[i] \(notification.id)")
                         } else {
                             print("notification not found!")
                         }
@@ -132,7 +136,7 @@ final class DatabaseManager {
         }
     }
     
-    public func addNotification(notification: DogNotification){
+    public func addNotification(notification: DogNotification, dogId: String){
         // Convert DogNotification properties to compatible types
         let notificationDict: [String: Any] = [
             "id": notification.id,
@@ -146,7 +150,17 @@ final class DatabaseManager {
                 print("Error writing data to Firebase: \(error)")
             } else {
                 // Data was successfully written
-                
+                self.database.child("Dogs").child(dogId).child("notifications").observeSingleEvent(of: .value, with: { snapshot in
+                    if let list = snapshot.value as? [String]{
+                        var notificationList: [String] = []
+                        notificationList.append(contentsOf: list)
+                        notificationList.append(notification.id)
+                        if notificationList[0] == ""{
+                            notificationList.remove(at: 0)
+                        }
+                        self.database.child("Dogs").child(dogId).child("notifications").setValue(notificationList)
+                    }
+                })
                 print("Data written to Firebase")
             }
         }
@@ -215,12 +229,12 @@ final class DatabaseManager {
                                                 var dogList: [String] = []
                                                 dogList.append(contentsOf: list)
                                                 dogList.append(dog.id)
+                                                if dogList[0] == ""{
+                                                    dogList.remove(at: 0)
+                                                }
                                                 self.database.child("Users").child(Auth.auth().currentUser!.uid).child("dogs").setValue(dogList)
                                             }
                                         })
-                                        //self.database.child("Users").child(Auth.auth().currentUser!.uid).child("dogs").child(dog.id).setValue(dog.id)
-                                        //print(Auth.auth().currentUser!.uid)
-                                        
                                         print("Dog added to Firebase")
                                     }
                                 }
