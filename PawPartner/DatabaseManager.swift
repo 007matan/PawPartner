@@ -32,7 +32,7 @@ final class DatabaseManager {
                let dateString = notificationData["date"] as? Int,
                let date = self.dateFromUnixTimestampString(String(dateString)) { // Convert dateString to Date
                 let dogNotification = DogNotification(id: id, type: type, date: date)
-                   completion(dogNotification)
+                print("found Dognot[i] \(dogNotification.date) \(dogNotification.type)");                   completion(dogNotification)
             } else {
                 completion(nil) // Notification not found or data structure mismatch
             }
@@ -52,11 +52,13 @@ final class DatabaseManager {
                let meal = dogData["meal"] as? [Bool] {
                 var notificationList:[DogNotification] = []
                 print("B")
+                let dispatchGroup = DispatchGroup()
                 for notification in notifications {
                     if notification.isEmpty{
                         continue
                     }
                     print("not[i]: \(notification)")
+                    dispatchGroup.enter()
                     self.getDogNotification(id: notification){ notification in
                         if let notification = notification {
                             notificationList.append(notification)
@@ -64,13 +66,20 @@ final class DatabaseManager {
                         } else {
                             print("notification not found!")
                         }
+                        dispatchGroup.leave()
+                        
                     }
                     
                 }
                 
-            
-                let dog = Dog(id: id, image: image, name: name, notifications: notificationList, walking: walking, meal: meal)
+                dispatchGroup.notify(queue: .main) {
+                    
+                    let dog = Dog(id: id, image: image, name: name, notifications: notificationList, walking: walking, meal: meal)
+                
+                print("Check: \(notificationList)")
                 completion(dog)
+                }
+                
             } else {
                 completion(nil) // Dog not found or data structure mismatch
             }
@@ -99,7 +108,7 @@ final class DatabaseManager {
                     self.getDog(id: dog) { dog in
                         if let dog = dog {
                             dogList.append(dog)
-                            //print("Dog: -> \(dog)")
+                            print("Dog: ->->->-> \(dog.notifications)")
                         } else {
                             print("Dog does not exist")
                         }
