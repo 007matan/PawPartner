@@ -52,4 +52,12 @@ class DogNotification: Codable{
         }
         return nil
     }
+    
+    static func formatDateWithLastTwoDigitsYear(_ inputDate: Date) -> String {
+        let outputFormat = DateFormatter()
+        outputFormat.dateFormat = "dd/MM/yy, HH:mm"
+        outputFormat.timeZone = TimeZone(identifier: "UTC")
+        
+        return outputFormat.string(from: inputDate)
+    }
 }

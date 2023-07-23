@@ -14,22 +14,18 @@ class NotificationsViewController: UIViewController,CustomAlertDelegate {
     @IBOutlet weak var notificationCollectionView: UICollectionView!
     var images: [String] = []
     var dates: [String] = []
+    var names: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let readedJson = UserDefaultsManager.shared.getUser(){
-            print("---A---")
             if let readedUser = User.decodeFromJson(jsonString: readedJson){
-                print("---B---")
                 for dog in readedUser.dogs{
-                    print("---C---\(dog.notifications.count)")
                     for n in dog.notifications{
-                        //notifications.append(n)
-                        print("!!!!!!!!!!!")
-                        print("type:\(n.type)----date:\(n.date)")
+                        self.names.append(dog.name)
                         self.images.append(n.type)
-                        //self.dates.append(DateFormatter().string(from: n.date))
+                        self.dates.append(DogNotification.formatDateWithLastTwoDigitsYear(n.date))
                     }
                 }
             }
@@ -53,8 +49,6 @@ class NotificationsViewController: UIViewController,CustomAlertDelegate {
     func onSaveClicked(type: String, date: Date, dogId: String) {
         let dogNotification = DogNotification(type: type, date: date)
         DatabaseManager().addNotification(notification: dogNotification, dogId: dogId)
-        print(type)
-        print(date)
     }
     
 }
@@ -71,6 +65,7 @@ class NotificationsViewController: UIViewController,CustomAlertDelegate {
             cell.layer.cornerRadius = 20
             cell.titel.text = images[indexPath.row]
             cell.date.text = dates[indexPath.row]
+            cell.dogName.text = names[indexPath.row]
             cell.image.image = UIImage(named: images[indexPath.row])
             return cell
         }
@@ -81,8 +76,8 @@ class NotificationsViewController: UIViewController,CustomAlertDelegate {
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             let width = (notificationCollectionView.frame.size.width)
-            let height = (notificationCollectionView.frame.size.height) / 10
-            return CGSize(width: width, height: height)
+            //let height = (notificationCollectionView.frame.size.height) / 10
+            return CGSize(width: width, height: 90)
         }
         
     }

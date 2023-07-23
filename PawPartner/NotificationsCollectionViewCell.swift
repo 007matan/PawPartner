@@ -10,6 +10,7 @@ import UIKit
 class NotificationsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
 
+    @IBOutlet weak var dogName: UILabel!
     @IBOutlet weak var titel: UILabel!
     @IBOutlet weak var date: UILabel!
 }

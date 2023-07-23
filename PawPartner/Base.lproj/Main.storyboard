@@ -705,14 +705,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EZK-0z-0vg" userLabel="remainderImage">
-                                                    <rect key="frame" x="15" y="28" width="50" height="50"/>
+                                                    <rect key="frame" x="15" y="38" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="sEb-De-fTB"/>
                                                         <constraint firstAttribute="height" constant="50" id="teX-a9-Ava"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01/02/23" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WaE-5j-diF" userLabel="date">
-                                                    <rect key="frame" x="279.33333333333331" y="42.666666666666664" width="67.666666666666686" height="21"/>
+                                                    <rect key="frame" x="215" y="52.666666666666664" width="132" height="20.999999999999993"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="5uH-7t-fo6"/>
                                                     </constraints>
@@ -720,27 +720,42 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVX-wN-7uA" userLabel="remainderName">
-                                                    <rect key="frame" x="95.000000000000014" y="42.666666666666664" width="154.33333333333337" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVX-wN-7uA" userLabel="remainderName">
+                                                    <rect key="frame" x="80" y="52.666666666666664" width="120" height="20.999999999999993"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="70x-WH-zej"/>
+                                                        <constraint firstAttribute="width" constant="120" id="RS7-dY-HsU"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Id0-uM-NX0" userLabel="dogName">
+                                                    <rect key="frame" x="160" y="5" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="qNl-qU-Sr9"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="dVX-wN-7uA" firstAttribute="leading" secondItem="EZK-0z-0vg" secondAttribute="trailing" constant="30" id="2Go-Ta-s7o"/>
-                                                <constraint firstItem="WaE-5j-diF" firstAttribute="leading" secondItem="RUw-zg-8zv" secondAttribute="leading" constant="279.32999999999998" id="7Rb-OK-xkw"/>
-                                                <constraint firstItem="WaE-5j-diF" firstAttribute="leading" secondItem="dVX-wN-7uA" secondAttribute="trailing" constant="30" id="L4V-bn-vIF"/>
-                                                <constraint firstItem="dVX-wN-7uA" firstAttribute="centerY" secondItem="RUw-zg-8zv" secondAttribute="centerY" id="YjI-kZ-8da"/>
-                                                <constraint firstItem="EZK-0z-0vg" firstAttribute="centerY" secondItem="RUw-zg-8zv" secondAttribute="centerY" id="d8i-j3-dA2"/>
+                                                <constraint firstItem="dVX-wN-7uA" firstAttribute="leading" secondItem="EZK-0z-0vg" secondAttribute="trailing" constant="15" id="2Go-Ta-s7o"/>
+                                                <constraint firstItem="WaE-5j-diF" firstAttribute="leading" secondItem="dVX-wN-7uA" secondAttribute="trailing" constant="15" id="L4V-bn-vIF"/>
+                                                <constraint firstItem="dVX-wN-7uA" firstAttribute="centerY" secondItem="RUw-zg-8zv" secondAttribute="centerY" constant="10" id="MPr-dd-dA7"/>
+                                                <constraint firstItem="EZK-0z-0vg" firstAttribute="centerY" secondItem="RUw-zg-8zv" secondAttribute="centerY" constant="10" id="d8i-j3-dA2"/>
+                                                <constraint firstItem="Id0-uM-NX0" firstAttribute="centerX" secondItem="RUw-zg-8zv" secondAttribute="centerX" id="eec-pD-Ge1"/>
+                                                <constraint firstItem="Id0-uM-NX0" firstAttribute="top" secondItem="RUw-zg-8zv" secondAttribute="top" constant="5" id="gf9-7R-Anf"/>
                                                 <constraint firstAttribute="trailing" secondItem="WaE-5j-diF" secondAttribute="trailing" constant="15" id="jDs-Og-sKB"/>
                                                 <constraint firstItem="EZK-0z-0vg" firstAttribute="leading" secondItem="RUw-zg-8zv" secondAttribute="leading" constant="15" id="xD3-s8-5q7"/>
-                                                <constraint firstItem="WaE-5j-diF" firstAttribute="centerY" secondItem="RUw-zg-8zv" secondAttribute="centerY" id="zjt-mi-sim"/>
+                                                <constraint firstItem="WaE-5j-diF" firstAttribute="centerY" secondItem="RUw-zg-8zv" secondAttribute="centerY" constant="10" id="zjt-mi-sim"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="362" height="106"/>
                                         <connections>
                                             <outlet property="date" destination="WaE-5j-diF" id="s1H-pg-XEe"/>
+                                            <outlet property="dogName" destination="Id0-uM-NX0" id="lvr-h1-cod"/>
                                             <outlet property="image" destination="EZK-0z-0vg" id="qIY-1r-Sl4"/>
                                             <outlet property="titel" destination="dVX-wN-7uA" id="eUu-Es-0DY"/>
                                         </connections>
@@ -1215,6 +1230,9 @@
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemMintColor">
             <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

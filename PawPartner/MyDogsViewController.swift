@@ -65,7 +65,7 @@ extension MyDogsViewController: UICollectionViewDelegate,UICollectionViewDataSou
         cell.name.text = names[indexPath.row]
         let url = URL(string: images[indexPath.row])
         cell.image.kf.setImage(with: url)
-        let processor = DownsamplingImageProcessor(size: cell.image.bounds.size) |> RoundCornerImageProcessor(cornerRadius: cell.image.bounds.height / 2)
+        let processor = DownsamplingImageProcessor(size: cell.image.bounds.size) |> RoundCornerImageProcessor(cornerRadius: 0)
         KF.url(url)
             .setProcessor(processor)
             .loadDiskFileSynchronously()
