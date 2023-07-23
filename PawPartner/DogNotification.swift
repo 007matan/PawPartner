@@ -60,4 +60,12 @@ class DogNotification: Codable{
         
         return outputFormat.string(from: inputDate)
     }
+    
+    static func getDateFormat(_ date: Date, format:String)-> String{
+        let outputFormat = DateFormatter()
+        outputFormat.dateFormat = format
+        outputFormat.timeZone = TimeZone(identifier: "UTC")
+        
+        return outputFormat.string(from: date)
+    }
 }

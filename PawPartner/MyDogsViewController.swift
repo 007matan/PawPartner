@@ -128,7 +128,6 @@ extension MyDogsViewController: ExistingDogAlertDelegate{
 }
 
 @IBDesignable extension UIView {
-    
     @IBInspectable var cornerRadius: CGFloat {
         get { return layer.cornerRadius }
         set {

@@ -6,21 +6,24 @@
 //
 
 import UIKit
+import Kingfisher
 
 class HomePageViewController: UIViewController {
 
+    @IBOutlet weak var dogPicker: UIButton!
     @IBOutlet weak var morningWalk: UIButton!
     @IBOutlet weak var eveningWalk: UIButton!
     @IBOutlet weak var afternoonWalk: UIButton!
     @IBOutlet weak var supper: UIButton!
     @IBOutlet weak var breakfast: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
-    var user: User?
-    let images: [String] = ["Barber", "Contest", "Training", "Bath", "Dental care"]
-    let names: [String] = ["Barber", "Contest", "Training", "Bath", "Dental care"]
-    let dates: [String] = ["1/1/20", "2/1/20", "1/1/23", "4/1/23", "5/6/23"]
-    @IBOutlet weak var petName: UILabel!
     @IBOutlet weak var petImage: UIImageView!
+    var user: User?
+    var walkings: [UIButton] = []
+    var meals: [UIButton] = []
+    var notificationList: [String] = []
+    var notificationDates: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -29,12 +32,74 @@ class HomePageViewController: UIViewController {
                 user = readedUser
             }
         }
+        setDogsPickerMenu()
+        walkings = [morningWalk, afternoonWalk, eveningWalk]
+        meals = [breakfast, supper]
         petImage.backgroundColor = .blue
         petImage.layer.masksToBounds = true
         petImage.layer.cornerRadius = petImage.frame.height / 2
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        
     }
+    
+    func setDogsPickerMenu(){
+        var children: [UIAction] = []
+        
+        for dog in user!.dogs{
+            let action = UIAction(title: dog.name, handler: { _ in
+                self.updateUI(dog: dog)
+                self.collectionView.dataSource = self
+                self.collectionView.delegate = self
+                self.collectionView.reloadData()
+            })
+            children.append(action)
+        }
+        dogPicker.menu = UIMenu(title:"Pick Dog", options: .displayInline, children: children)
+    }
+    
+    func updateUI(dog: Dog){
+        
+        self.dogPicker.setTitle(dog.name, for: .normal)
+        self.notificationList = []
+        self.notificationDates = []
+        
+        
+        let url = URL(string: dog.image)
+        petImage.kf.setImage(with: url)
+        let processor = DownsamplingImageProcessor(size: petImage.bounds.size) |> RoundCornerImageProcessor(cornerRadius: 0)
+        KF.url(url)
+            .setProcessor(processor)
+            .loadDiskFileSynchronously()
+            .fade(duration: 0.25)
+            .set(to: petImage)
+        
+        for n in dog.notifications{
+            self.notificationList.append(n.type)
+            self.notificationDates.append(DogNotification.getDateFormat(n.date, format: "dd/MM/yy"))
+        }
+        var walkingImage = ""
+        for (i, flag) in dog.walking.enumerated(){
+            if flag == true{
+                walkingImage = "walk_full"
+            }else{
+                walkingImage = "walk_empty"
+            }
+            self.walkings[i].setImage(UIImage(named: walkingImage), for: .normal)
+            
+        }
+        var mealImage = ""
+        for (i, flag) in dog.meal.enumerated(){
+            if flag{
+                mealImage = "meal_full"
+            }else{
+                mealImage = "meal_empty"
+            }
+            self.meals[i].setImage(UIImage(named: mealImage), for: .normal)
+        }
+    }
+    
+
+    
+    
     @IBAction func onMorningWalkClicked(_ sender: Any) {
         morningWalk.setImage(UIImage(named: "walk_full"), for: .normal)
     }
@@ -64,13 +129,13 @@ class HomePageViewController: UIViewController {
 extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return names.count
+        return notificationList.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! HomePageCollectionViewCell
-        cell.typeLabel.text = names[indexPath.row]//"cell" - the name of cell attribute
-        cell.imageView.image = UIImage(named: images[indexPath.row])
-        cell.dateLabel.text = dates[indexPath.row]
+        cell.typeLabel.text = notificationList[indexPath.row]//"cell" - the name of cell attribute
+        cell.imageView.image = UIImage(named: notificationList[indexPath.row])
+        cell.dateLabel.text = notificationDates[indexPath.row]
         return cell
     }
     
