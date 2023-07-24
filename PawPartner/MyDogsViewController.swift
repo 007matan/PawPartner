@@ -14,17 +14,19 @@ class MyDogsViewController: UIViewController {
     @IBOutlet weak var myDogsCollectionView: UICollectionView!
     var names: [String] = []
     var images: [String] = []
-    var id: [String] = []
+    var ids: [String] = []
+    var user: User?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if let readedJson = UserDefaultsManager.shared.getUser(){
-            if let readedUser2 = User.decodeFromJson(jsonString: readedJson){
-                for dog in readedUser2.dogs{
+            if let readedUser = User.decodeFromJson(jsonString: readedJson){
+                self.user = readedUser
+                for dog in readedUser.dogs{
                     self.names.append(dog.name)
                     self.images.append(dog.image)
-                    self.id.append(dog.id)
+                    self.ids.append(dog.id)
                 }
             }
         }
@@ -82,7 +84,7 @@ extension MyDogsViewController: UICollectionViewDelegate,UICollectionViewDataSou
         guard let indexPath = myDogsCollectionView.indexPath(for: cell) else{
             return
         }
-        let text = id[indexPath.row]
+        let text = ids[indexPath.row]
         UIPasteboard.general.string = text
         let name = names[indexPath.row]
         let alert = UIAlertController(title: "Copied", message: "\(name) ID copied to clipboard\nSend \(name) ID to your relative for him to be abled to add \(name) to his dog collection", preferredStyle: .alert)
@@ -115,15 +117,52 @@ extension UIView{
 extension MyDogsViewController: NewDogAlertDelegate{
     func onSaveClicked(name: String, image: UIImage) {
         let dog = Dog(image: "", name: name, notifications: [])
-        DatabaseManager().addNewDog(dog: dog, image: image)
-        print(name)
-        print(image)
+        DatabaseManager().addNewDog(dog: dog, image: image){seccsess, error in
+            if seccsess{
+                DatabaseManager().getDog(id: dog.id){ dog in
+                    if let dog = dog {
+                        self.user?.dogs.append(dog)
+                        self.ids.append(dog.id)
+                        self.names.append(dog.name)
+                        self.images.append(dog.image)
+                        self.myDogsCollectionView.reloadData()
+                        UserDefaultsManager().saveUser(self.user!.encodeToJson())
+                        
+                    } else {
+                        print("Dog does not exist")
+                    }
+                }
+            }else{
+                print("Failed")
+            }
+        }
     }
 }
 extension MyDogsViewController: ExistingDogAlertDelegate{
     func onSaveClicked(id: String) {
-        DatabaseManager().addExistingDog(id: id)
-        print(id)
+        var idsList = self.ids
+        idsList.append(id)
+        DatabaseManager().addExistingDog(id: idsList){seccsess, error in
+            if seccsess{
+                //update the user
+                DatabaseManager().getDog(id: id){ dog in
+                    if let dog = dog {
+                        self.user?.dogs.append(dog)
+                        self.ids.append(dog.id)
+                        self.names.append(dog.name)
+                        self.images.append(dog.image)
+                        self.myDogsCollectionView.reloadData()
+                    } else {
+                        print("Dog does not exist")
+                    }
+                }
+                //save to user default
+                UserDefaultsManager().saveUser(self.user!.encodeToJson())
+                
+            }else{
+                print("Failed")
+            }
+        }
     }
 }
 

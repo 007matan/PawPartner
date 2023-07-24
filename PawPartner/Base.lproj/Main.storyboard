@@ -1055,6 +1055,12 @@
                                     <action selector="onClickedBack:" destination="dmI-h8-buR" eventType="touchUpInside" id="qdX-3v-mc0"/>
                                 </connections>
                             </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="At0-a4-zLV" userLabel="Progress Bar">
+                                <rect key="frame" x="16" y="502" width="361" height="4"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="7JG-4v-zuv"/>
+                                </constraints>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KaF-8k-AcJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1075,16 +1081,19 @@
                             <constraint firstItem="Lxn-8R-CcC" firstAttribute="top" secondItem="Abt-Uy-jei" secondAttribute="bottom" constant="40" id="QAF-qD-YhZ"/>
                             <constraint firstItem="ZIt-OG-5yN" firstAttribute="top" secondItem="KaF-8k-AcJ" secondAttribute="top" constant="40" id="SsG-d6-x2l"/>
                             <constraint firstItem="tAq-xJ-e8C" firstAttribute="top" secondItem="ZIt-OG-5yN" secondAttribute="bottom" constant="40" id="UEa-4m-6J2"/>
-                            <constraint firstItem="bHG-BR-X28" firstAttribute="top" secondItem="Lxn-8R-CcC" secondAttribute="bottom" constant="80" id="ay2-hF-SxQ"/>
+                            <constraint firstItem="KaF-8k-AcJ" firstAttribute="trailing" secondItem="At0-a4-zLV" secondAttribute="trailing" constant="16" id="ZkF-lO-bYd"/>
                             <constraint firstItem="KaF-8k-AcJ" firstAttribute="trailing" secondItem="ftZ-d0-Fyc" secondAttribute="trailing" constant="40" id="cnD-Fg-Bu3"/>
                             <constraint firstItem="bug-rt-7b0" firstAttribute="leading" secondItem="fRO-Lo-01i" secondAttribute="trailing" constant="10" id="eMt-bV-X8v"/>
+                            <constraint firstItem="At0-a4-zLV" firstAttribute="top" secondItem="Lxn-8R-CcC" secondAttribute="bottom" constant="43" id="g03-NT-Xnb"/>
                             <constraint firstItem="Lxn-8R-CcC" firstAttribute="leading" secondItem="KaF-8k-AcJ" secondAttribute="leading" constant="20" id="hvr-aZ-uUp"/>
                             <constraint firstItem="bug-rt-7b0" firstAttribute="top" secondItem="ftZ-d0-Fyc" secondAttribute="bottom" constant="40" id="hwA-a1-8TO"/>
                             <constraint firstItem="hrI-3Y-pA2" firstAttribute="leading" secondItem="Abt-Uy-jei" secondAttribute="trailing" constant="10" id="kbV-rx-e8p"/>
                             <constraint firstItem="Abt-Uy-jei" firstAttribute="top" secondItem="fRO-Lo-01i" secondAttribute="bottom" constant="40" id="mAo-hg-vBW"/>
                             <constraint firstItem="KaF-8k-AcJ" firstAttribute="trailing" secondItem="6mZ-Wv-2OO" secondAttribute="trailing" constant="40" id="rE8-3Z-iYV"/>
                             <constraint firstItem="KaF-8k-AcJ" firstAttribute="trailing" secondItem="bug-rt-7b0" secondAttribute="trailing" constant="40" id="rT9-aq-nLd"/>
+                            <constraint firstItem="bHG-BR-X28" firstAttribute="top" secondItem="At0-a4-zLV" secondAttribute="bottom" constant="33" id="tCZ-dZ-Z7W"/>
                             <constraint firstItem="hrI-3Y-pA2" firstAttribute="top" secondItem="bug-rt-7b0" secondAttribute="bottom" constant="40" id="wSR-f8-Puj"/>
+                            <constraint firstItem="At0-a4-zLV" firstAttribute="leading" secondItem="KaF-8k-AcJ" secondAttribute="leading" constant="16" id="wxz-zf-SZ2"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1092,11 +1101,12 @@
                         <outlet property="email" destination="bug-rt-7b0" id="w2a-fG-nLU"/>
                         <outlet property="name" destination="ftZ-d0-Fyc" id="yVW-WN-Ttl"/>
                         <outlet property="password" destination="hrI-3Y-pA2" id="jl0-VY-fVz"/>
+                        <outlet property="progressBar" destination="At0-a4-zLV" id="PKT-2y-F6a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FiV-75-frP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3166" y="-542"/>
+            <point key="canvasLocation" x="-3167.1755725190837" y="-542.25352112676057"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="S7w-yk-XHL">

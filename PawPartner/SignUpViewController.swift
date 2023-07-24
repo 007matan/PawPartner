@@ -9,16 +9,56 @@ import UIKit
 
 class SignUpViewController: UIViewController {
     
+    @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var confirmPassword: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var name: UITextField!
+    var myFlag: Bool = true
+    var progressTimer: Timer?
+    var isReversed = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        progressBar.isHidden = true
     }
     
+    
+    func initProgressBar() {
+            self.progressBar.isHidden = false
+            self.progressBar.setProgress(0, animated: false)
+            self.progressBar.progressTintColor = .blue
+            
+            var progress: Float = 0.0
+            let progressIncrement: Float = 0.01
+
+            progressTimer?.invalidate() // Invalidate the previous timer, if any.
+            progressTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                if self.isReversed {
+                    progress -= progressIncrement
+                    if progress <= 0 {
+                        progress = 0
+                        self.isReversed = false // Change direction to increment.
+                    }
+                } else {
+                    progress += progressIncrement
+                    if progress >= 1 {
+                        progress = 1
+                        self.isReversed = true // Change direction to decrement.
+                    }
+                }
+
+                DispatchQueue.main.async {
+                    self.progressBar.setProgress(progress, animated: true)
+                }
+                if !self.myFlag {
+                    // Invalidate the timer when the flag is false to stop updating the progress bar.
+                    timer.invalidate()
+                    DispatchQueue.main.async {
+                        self.progressBar.isHidden = true
+                    }
+                }
+            }
+        }
     
     @IBAction func onClickedSignUp(_ sender: UIButton) {
         let email_input = email.text ?? "null"
@@ -29,12 +69,16 @@ class SignUpViewController: UIViewController {
             return
         }else{
             if(isValidEmail(email: email_input) && password_input == confirm_input){
+                DispatchQueue.main.async {
+                    self.initProgressBar()
+                }
                 AuthManager().signUp(name: name_input, email: email_input, password: password_input) { result in
                     switch result {
                     case .success(let user):
                         DatabaseManager().addUser(user: user){ success, error in
                             if success {
                                 print("User added to the database successfully")
+                                self.myFlag = false
                                 self.dismiss(animated: true, completion: nil)
                             } else {
                                 print("Failed to add user to the database: \(error?.localizedDescription ?? "Unknown error")")
@@ -42,9 +86,7 @@ class SignUpViewController: UIViewController {
                         }
                         
                         print("User signed up:")
-                        print("ID: \(user.id)")
-                        print("Name: \(user.name)")
-                        print("Email: \(user.email)")
+                        
                     case .failure(let error):
                         print("Sign-up error: \(error.localizedDescription)")
                     }

@@ -13,37 +13,50 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var email: UITextField!
     var myFlag: Bool = true
+    var progressTimer: Timer?
+    var isReversed = false
     override func viewDidLoad() {
         super.viewDidLoad()
         progressBar.isHidden = true
         // Do any additional setup after loading the view.
     }
-    func initProgressBar(){
-        self.progressBar.isHidden = false
-        self.progressBar.setProgress(0, animated: false)
-        self.progressBar.progressTintColor = .blue
-        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 1.0) {
-            print("SEC")
-            var progress = 0.0
-            var isAnimated = false
-            while self.myFlag {
-                if(progress > 0.9){
-                    progress = 0.0
-                    isAnimated = false
-                }else{
-                    progress = progress + 0.01
-                    isAnimated = true
+    func initProgressBar() {
+            self.progressBar.isHidden = false
+            self.progressBar.setProgress(0, animated: false)
+            self.progressBar.progressTintColor = .blue
+            
+            var progress: Float = 0.0
+            let progressIncrement: Float = 0.01
+
+            progressTimer?.invalidate() // Invalidate the previous timer, if any.
+            progressTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                if self.isReversed {
+                    progress -= progressIncrement
+                    if progress <= 0 {
+                        progress = 0
+                        self.isReversed = false // Change direction to increment.
+                    }
+                } else {
+                    progress += progressIncrement
+                    if progress >= 1 {
+                        progress = 1
+                        self.isReversed = true // Change direction to decrement.
+                    }
                 }
+
                 DispatchQueue.main.async {
-                    self.progressBar.setProgress(Float(progress), animated: isAnimated)
+                    self.progressBar.setProgress(progress, animated: true)
                 }
-                
-            }
-            DispatchQueue.main.async {
-                self.progressBar.isHidden = true
+                if !self.myFlag {
+                    // Invalidate the timer when the flag is false to stop updating the progress bar.
+                    timer.invalidate()
+                    DispatchQueue.main.async {
+                        self.progressBar.isHidden = true
+                    }
+                }
             }
         }
-    }
+
     
     @IBAction func onClickedSignIn(_ sender: UIButton) {
         let email_input = email.text ?? "null"
@@ -56,8 +69,9 @@ class SignInViewController: UIViewController {
                     switch result {
                     case .success(let user):
                         // retrive user data
-                        
-                        //self.initProgressBar()
+                        DispatchQueue.main.async {
+                            self.initProgressBar()
+                        }
                         DatabaseManager().getUser(id: user.id){ user in
                             if let user = user {
                                 let jsonString = user.encodeToJson()

@@ -24,6 +24,8 @@ final class DatabaseManager {
     }
     
     
+    
+    
     func getDogNotification(id: String, completion: @escaping (DogNotification?) -> Void) {
         database.child("Notifications").child(id).observeSingleEvent(of: .value, with: { snapshot in
             if let notificationData = snapshot.value as? [String: Any],
@@ -41,7 +43,6 @@ final class DatabaseManager {
 
     
     func getDog(id: String, completion: @escaping (Dog?) -> Void) {
-        print("A:\(id)")
         database.child("Dogs").child(id).observeSingleEvent(of: .value, with: { snapshot in
             if let dogData = snapshot.value as? [String: Any],
                let id = dogData["id"] as? String,
@@ -51,7 +52,6 @@ final class DatabaseManager {
                let walking = dogData["walking"] as? [Bool],
                let meal = dogData["meal"] as? [Bool] {
                 var notificationList:[DogNotification] = []
-                print("B")
                 let dispatchGroup = DispatchGroup()
                 for notification in notifications {
                     if notification.isEmpty{
@@ -62,7 +62,6 @@ final class DatabaseManager {
                     self.getDogNotification(id: notification){ notification in
                         if let notification = notification {
                             notificationList.append(notification)
-                            print("found not[i] \(notification.id)")
                         } else {
                             print("notification not found!")
                         }
@@ -88,8 +87,6 @@ final class DatabaseManager {
     
     
     func getUser(id: String, completion: @escaping (User?) -> Void) {
-        print("1")
-        //var dogList: [Dog] = []
         database.child("Users").child(id).observeSingleEvent(of: .value, with: { snapshot in
             if let userData = snapshot.value as? [String: Any],
                let dogs = userData["dogs"] as? [String],
@@ -98,7 +95,6 @@ final class DatabaseManager {
                let name = userData["name"] as? String {
                 var dogList: [Dog] = []
                 let dispatchGroup = DispatchGroup() // Used to wait for all dogs to be fetched
-                print("2")
                 for dog in dogs {
                     if dog.isEmpty{
                         continue
@@ -108,7 +104,6 @@ final class DatabaseManager {
                     self.getDog(id: dog) { dog in
                         if let dog = dog {
                             dogList.append(dog)
-                            print("Dog: ->->->-> \(dog.notifications)")
                         } else {
                             print("Dog does not exist")
                         }
@@ -124,6 +119,29 @@ final class DatabaseManager {
                 completion(nil) // No user data or invalid data
             }
         })
+    }
+    
+   
+    
+    public func addExistingDog(id: [String], complation: @escaping (Bool, Error?) -> Void){
+        checkDogExists(withID: id.last!) { exist in
+            if exist {
+                //add dog to user
+                self.database.child("Users").child(Auth.auth().currentUser!.uid).child("dogs").setValue(id) {error, _ in
+                    if let error = error {
+                        complation(false, error)
+                        print("Failed to add existing dog")
+                    } else {
+                        complation(true, nil)
+                        print("Updated the firebase")
+                    }
+                }
+                
+            }
+            else{
+                print("Dog doesn't exist on Firebase")
+            }
+        }
     }
 
     func addUser(user: User, completion: @escaping (Bool, Error?) -> Void) {
@@ -145,7 +163,7 @@ final class DatabaseManager {
         }
     }
     
-    public func addNotification(notification: DogNotification, dogId: String){
+    public func addNotification(notification: DogNotification, dogId: String, completion: @escaping (Bool, Error?) -> Void){
         // Convert DogNotification properties to compatible types
         let notificationDict: [String: Any] = [
             "id": notification.id,
@@ -167,7 +185,14 @@ final class DatabaseManager {
                         if notificationList[0] == ""{
                             notificationList.remove(at: 0)
                         }
-                        self.database.child("Dogs").child(dogId).child("notifications").setValue(notificationList)
+                        self.database.child("Dogs").child(dogId).child("notifications").setValue(notificationList) { error, _ in
+                            if let error = error {
+                                completion(false, error)
+                            }else{
+                                completion(true, nil)
+                            }
+                        }
+                            
                     }
                 })
                 print("Data written to Firebase")
@@ -175,19 +200,7 @@ final class DatabaseManager {
         }
     }
     
-    public func addExistingDog(id: String){
-        checkDogExists(withID: id) { exist in
-            if exist {
-                //add dog to user
-                //self.database.child("Users").child("Dogs").child(id).setValue(id)
-                self.database.child("Users").child(Auth.auth().currentUser!.uid).child("dogs").child(id).setValue(id)
-                
-            }
-            else{
-                print("Dog doesn't exist on Firebase")
-            }
-        }
-    }
+    
     
     func checkDogExists(withID id: String, completion: @escaping (Bool) -> Void) {
         let mdatabase = database.child("Dogs").child(id)
@@ -195,8 +208,23 @@ final class DatabaseManager {
             mdatabase.observeSingleEvent(of: .value) { (snapshot) in
                 completion(snapshot.exists())
             }
+        
+    }
+    
+    func updateWalkingOrMealStatus(path: String, flag: Bool, complation: @escaping (Bool, Error?) -> Void){
+        database.child("Dogs").child(path).setValue(flag) {error, _ in
+            if let error = error {
+                complation(false, error)
+                print("Feild to update Walking or mael status")
+            }else {
+                complation(true, nil)
+                print("Update walking Or meals status")
+            }
         }
-    func addNewDog(dog: Dog, image: UIImage) {
+        
+    }
+    
+    func addNewDog(dog: Dog, image: UIImage, complation: @escaping (Bool, Error?) -> Void) {
         let storageRef = Storage.storage().reference()
             // Convert Dog properties to compatible types
             let dogDict: [String: Any] = [
@@ -241,7 +269,13 @@ final class DatabaseManager {
                                                 if dogList[0] == ""{
                                                     dogList.remove(at: 0)
                                                 }
-                                                self.database.child("Users").child(Auth.auth().currentUser!.uid).child("dogs").setValue(dogList)
+                                                self.database.child("Users").child(Auth.auth().currentUser!.uid).child("dogs").setValue(dogList){ error, _ in
+                                                    if let error = error{
+                                                        complation(false, error)
+                                                    }else{
+                                                        complation(true, nil)
+                                                    }
+                                                }
                                             }
                                         })
                                         print("Dog added to Firebase")

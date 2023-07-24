@@ -15,12 +15,14 @@ class NotificationsViewController: UIViewController,CustomAlertDelegate {
     var images: [String] = []
     var dates: [String] = []
     var names: [String] = []
+    var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let readedJson = UserDefaultsManager.shared.getUser(){
             if let readedUser = User.decodeFromJson(jsonString: readedJson){
+                self.user = readedUser
                 for dog in readedUser.dogs{
                     for n in dog.notifications{
                         self.names.append(dog.name)
@@ -48,7 +50,26 @@ class NotificationsViewController: UIViewController,CustomAlertDelegate {
     
     func onSaveClicked(type: String, date: Date, dogId: String) {
         let dogNotification = DogNotification(type: type, date: date)
-        DatabaseManager().addNotification(notification: dogNotification, dogId: dogId)
+        DatabaseManager().addNotification(notification: dogNotification, dogId: dogId) {seccsess, error in
+            if seccsess{
+                //update the user
+                for (index, dog) in self.user!.dogs.enumerated(){
+                    if dog.id == dogId{
+                        self.user?.dogs[index].notifications.append(dogNotification)
+                        //Update Collection
+                        self.names.append(dog.name)
+                        self.images.append(dogNotification.type)
+                        self.dates.append(DogNotification.formatDateWithLastTwoDigitsYear(dogNotification.date))
+                        self.notificationCollectionView.reloadData()
+                    }
+                }
+                //Save user to UserDefault
+                UserDefaultsManager().saveUser(self.user!.encodeToJson())
+                
+            }else{
+                
+            }
+        }
     }
     
 }

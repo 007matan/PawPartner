@@ -19,6 +19,8 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var petImage: UIImageView!
     var user: User?
+    var currentDog: Dog?
+    var currentDogId = ""
     var walkings: [UIButton] = []
     var meals: [UIButton] = []
     var notificationList: [String] = []
@@ -47,6 +49,7 @@ class HomePageViewController: UIViewController {
         for dog in user!.dogs{
             let action = UIAction(title: dog.name, handler: { _ in
                 self.updateUI(dog: dog)
+                self.currentDog = dog
                 self.collectionView.dataSource = self
                 self.collectionView.delegate = self
                 self.collectionView.reloadData()
@@ -101,29 +104,80 @@ class HomePageViewController: UIViewController {
     
     
     @IBAction func onMorningWalkClicked(_ sender: Any) {
-        morningWalk.setImage(UIImage(named: "walk_full"), for: .normal)
+        updateWalking(WalkingIndex: 0)
+        
     }
     @IBAction func onAfternoonWalkClicked(_ sender: Any) {
-        afternoonWalk.setImage(UIImage(named: "walk_full"), for: .normal)
+        updateWalking(WalkingIndex: 1)
     }
     @IBAction func onEveningWalkClicked(_ sender: Any) {
-        eveningWalk.setImage(UIImage(named: "walk_full"), for: .normal)
+        updateWalking(WalkingIndex: 2)
         
     }
     @IBAction func onBreakfastClicked(_ sender: Any) {
-        breakfast.setImage(UIImage(named: "bowl_full"), for: .normal)
+        updateMeal(mealIndex: 0)
         
     }
     @IBAction func onSupperClicked(_ sender: Any) {
-        supper.setImage(UIImage(named: "bowl_full"), for: .normal)
-        
+        updateMeal(mealIndex: 1)
     }
     
+    func updateMeal(mealIndex: Int){
+        guard let cDog = self.currentDog else{
+            print("choose dog first")
+            return
+        }
+        let path = "\(cDog.id)/meal/\(mealIndex)"
+                var flag = true
+                var image = "meal_full"
+                if(cDog.meal[mealIndex]){
+                    flag = false
+                    image = "meal_empty"
+                }
+                DatabaseManager().updateWalkingOrMealStatus(path: path, flag: flag){ success, error in
+                    if success{
+                        for (index, dog) in self.user!.dogs.enumerated(){
+                            if dog.id == cDog.id{
+                                self.user!.dogs[index].meal[mealIndex] = flag
+                                UserDefaultsManager().saveUser(self.user!.encodeToJson())
+                            }
+                        }
+                        self.meals[mealIndex].setImage(UIImage(named: image), for: .normal)
+                        print("seccsess")
+                    }else{
+                        print("Failed")
+                    }
+                }
+    }
     
-    
-    
-    
-    
+    func updateWalking(WalkingIndex: Int){
+        guard let cDog = self.currentDog else{
+            print("choose dog first")
+            return
+        }
+        let path = "\(cDog.id)/walking/\(WalkingIndex)"
+                var flag = true
+                var image = "walk_full"
+                if(cDog.walking[WalkingIndex]){
+                    flag = false
+                    image = "walk_empty"
+                }
+                DatabaseManager().updateWalkingOrMealStatus(path: path, flag: flag){ success, error in
+                    if success{
+                        for (index, dog) in self.user!.dogs.enumerated(){
+                            if dog.id == cDog.id{
+                                self.user!.dogs[index].walking[WalkingIndex] = flag
+                                UserDefaultsManager().saveUser(self.user!.encodeToJson())
+                            }
+                        }
+                        self.walkings[WalkingIndex].setImage(UIImage(named: image), for: .normal)
+                        print("seccsess")
+                    }else{
+                        print("Failed")
+                    }
+                }
+    }
+ 
 }
 
 extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
