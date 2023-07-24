@@ -325,14 +325,19 @@
                     </view>
                     <navigationItem key="navigationItem" title="Home Page" id="fOJ-dt-aaK"/>
                     <connections>
+                        <outlet property="afternoonLabel" destination="p3s-i9-6g0" id="e81-uv-IwM"/>
                         <outlet property="afternoonWalk" destination="igR-b1-14L" id="mWv-L7-9cb"/>
                         <outlet property="breakfast" destination="15a-Wb-ruL" id="iCm-hB-RBH"/>
+                        <outlet property="breakfastLabel" destination="7jA-rN-4Bs" id="pow-X8-8aW"/>
                         <outlet property="collectionView" destination="EWN-Zc-fBK" id="Lrx-f9-ac4"/>
                         <outlet property="dogPicker" destination="ezp-VX-mog" id="5qd-Ks-TK3"/>
+                        <outlet property="eveningLabel" destination="lNd-xO-xDs" id="MDK-cR-juE"/>
                         <outlet property="eveningWalk" destination="GtR-4y-lQc" id="QZq-Zm-XNt"/>
+                        <outlet property="morningLabel" destination="c19-WQ-eWX" id="tfy-uL-rR0"/>
                         <outlet property="morningWalk" destination="n0N-G5-lVM" id="rJw-VN-Tg3"/>
                         <outlet property="petImage" destination="cg0-rk-tEP" id="JMj-ot-Szz"/>
                         <outlet property="supper" destination="fdb-Xd-fkw" id="xCY-eS-7FK"/>
+                        <outlet property="supperLabel" destination="HiY-o0-cHr" id="d5B-d2-oQb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1jr-9g-nHQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -802,7 +807,7 @@
         <!--My Dogs-->
         <scene sceneID="M8J-br-TGc">
             <objects>
-                <viewController id="Gh0-h8-3Gj" customClass="MyDogsViewController" customModule="PawPartner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyDogsViewController" id="Gh0-h8-3Gj" customClass="MyDogsViewController" customModule="PawPartner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xD5-fW-0us">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -914,11 +919,11 @@
             </objects>
             <point key="canvasLocation" x="78.625954198473281" y="714.78873239436621"/>
         </scene>
-        <!--Item-->
+        <!--NOTIFICATIONS-->
         <scene sceneID="Upq-jw-xRd">
             <objects>
                 <navigationController id="Buq-uJ-pVH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="CO6-5S-09I"/>
+                    <tabBarItem key="tabBarItem" title="NOTIFICATIONS" image="bell.fill" catalog="system" id="CO6-5S-09I"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="STI-7Q-af3">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -931,11 +936,11 @@
             </objects>
             <point key="canvasLocation" x="-883" y="1"/>
         </scene>
-        <!--Item-->
+        <!--MY DOGS-->
         <scene sceneID="awc-rn-Avb">
             <objects>
                 <navigationController id="whp-8Q-ucT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="tFv-Vg-tar"/>
+                    <tabBarItem key="tabBarItem" title="MY DOGS" image="pawprint.fill" catalog="system" id="tFv-Vg-tar"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rML-L9-f1J">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1214,11 +1219,11 @@
             </objects>
             <point key="canvasLocation" x="-2498.4732824427479" y="-537.32394366197184"/>
         </scene>
-        <!--Item-->
+        <!--HOME PAGE-->
         <scene sceneID="cWk-Fb-9OG">
             <objects>
                 <navigationController id="vu6-Sc-hfD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="ZPp-aX-udH"/>
+                    <tabBarItem key="tabBarItem" title="HOME PAGE" image="house.fill" catalog="system" id="ZPp-aX-udH"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2PN-Vs-pki">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1234,10 +1239,13 @@
     </scenes>
     <resources>
         <image name="addDog" width="50" height="50"/>
+        <image name="bell.fill" catalog="system" width="123" height="128"/>
         <image name="chevron.down" catalog="system" width="128" height="70"/>
+        <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="ic_plus" width="50" height="50"/>
         <image name="meal_empty" width="50" height="50"/>
         <image name="newDog" width="50" height="50"/>
+        <image name="pawprint.fill" catalog="system" width="128" height="112"/>
         <image name="walk_empty" width="50" height="50"/>
         <image name="walk_full" width="50" height="50"/>
         <systemColor name="labelColor">

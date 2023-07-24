@@ -27,8 +27,14 @@ class ExistingDogCustomAlertViewController: UIViewController {
     @IBAction func onSaveClicked(_ sender: Any) {
         let id = idTextField.text ?? ""
         if(id != "" && !id.isEmpty){
-            delegate?.onSaveClicked(id: id)
-            self.dismiss(animated: true, completion: nil)        }
+            AlertHelper.showAlertWithCancelButton(on: self, title: "Add new dog", message: "Are you sure you want to add a new Paw Partner?"){
+                self.delegate?.onSaveClicked(id: id)
+                self.dismiss(animated: true, completion: nil)
+            }
+        }else{
+            AlertHelper.showAlert(on: self, title: "Error", message: "Please enter dog id!")
+            
+        }
         
     }
     

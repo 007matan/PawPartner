@@ -66,6 +66,7 @@ class SignUpViewController: UIViewController {
         let password_input = password.text ?? "null"
         let confirm_input = confirmPassword.text ?? "null"
         if(email_input == "null" || name_input == "null" || password_input == "null" || confirm_input == "null" ) {
+            AlertHelper.showAlert(on: self, title: "Error", message: "Missing information, Please try again")
             return
         }else{
             if(isValidEmail(email: email_input) && password_input == confirm_input){
@@ -77,21 +78,25 @@ class SignUpViewController: UIViewController {
                     case .success(let user):
                         DatabaseManager().addUser(user: user){ success, error in
                             if success {
-                                print("User added to the database successfully")
                                 self.myFlag = false
-                                self.dismiss(animated: true, completion: nil)
+                                AlertHelper.showAlert(on: self, title: "Congratulation!", message: "Youre account created successfully"){
+                                    self.dismiss(animated: true, completion: nil)
+                                }
                             } else {
+                                self.myFlag = false
                                 print("Failed to add user to the database: \(error?.localizedDescription ?? "Unknown error")")
                             }
                         }
-                        
-                        print("User signed up:")
-                        
                     case .failure(let error):
+                        self.myFlag = false
+                        AlertHelper.showAlert(on: self, title: "Error", message: "Somthing went wrong, Please try again")
                         print("Sign-up error: \(error.localizedDescription)")
                     }
                     
                 }
+            }else{
+                AlertHelper.showAlert(on: self, title: "Error", message: "Invalid email or Password, Please try again")
+                
             }
         }
             

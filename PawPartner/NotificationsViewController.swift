@@ -19,7 +19,14 @@ class NotificationsViewController: UIViewController,CustomAlertDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        notificationCollectionView.dataSource = self
+        notificationCollectionView.delegate = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        dates = []
+        names = []
+        images = []
         if let readedJson = UserDefaultsManager.shared.getUser(){
             if let readedUser = User.decodeFromJson(jsonString: readedJson){
                 self.user = readedUser
@@ -32,11 +39,7 @@ class NotificationsViewController: UIViewController,CustomAlertDelegate {
                 }
             }
         }
-        
-        
-        notificationCollectionView.dataSource = self
-        notificationCollectionView.delegate = self
-       
+        notificationCollectionView.reloadData()
     }
     @IBAction func onNewNotificationClicked(_ sender: Any) {
         let customAlert = self.storyboard?.instantiateViewController(identifier: "CustomAlertViewController") as! CustomAlertViewController

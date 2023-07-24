@@ -19,6 +19,7 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         progressBar.isHidden = true
         // Do any additional setup after loading the view.
+        
     }
     func initProgressBar() {
             self.progressBar.isHidden = false
@@ -85,17 +86,17 @@ class SignInViewController: UIViewController {
                                 
                             } else {
                                 // Unable to fetch the user or user does not exist
-                                print("Unable to fetch user")
+                                AlertHelper.showAlert(on: self, title: "Eroor", message: "We could not find user with email: \(email_input)")
                             }
                         }
-                        // goto main page
-                        
-                        
                     case .failure(let error):
+                        AlertHelper.showAlert(on: self, title: "Eroor", message: "We could'nt find account with email: \(email_input)")
                         print("Sign-in error: \(error.localizedDescription)")
                     }
                     
                 }
+            }else{
+                AlertHelper.showAlert(on: self, title: "Error", message: "Invalid email, Try again")
             }
         }
     }

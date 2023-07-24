@@ -129,11 +129,11 @@ extension MyDogsViewController: NewDogAlertDelegate{
                         UserDefaultsManager().saveUser(self.user!.encodeToJson())
                         
                     } else {
-                        print("Dog does not exist")
+                        AlertHelper.showAlert(on: self, title: "Error", message: "Something went wrong, please try again!")
                     }
                 }
             }else{
-                print("Failed")
+                AlertHelper.showAlert(on: self, title: "Error", message: "Something went wrong, please try again!")
             }
         }
     }
@@ -152,15 +152,14 @@ extension MyDogsViewController: ExistingDogAlertDelegate{
                         self.names.append(dog.name)
                         self.images.append(dog.image)
                         self.myDogsCollectionView.reloadData()
+                        //save to user default
+                        UserDefaultsManager().saveUser(self.user!.encodeToJson())
                     } else {
-                        print("Dog does not exist")
+                        AlertHelper.showAlert(on: self, title: "Error", message: "Something went wrong, please try again!")
                     }
                 }
-                //save to user default
-                UserDefaultsManager().saveUser(self.user!.encodeToJson())
-                
             }else{
-                print("Failed")
+                AlertHelper.showAlert(on: self, title: "Error", message: "We couldn't find any dog with the given ID!")
             }
         }
     }

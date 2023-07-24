@@ -136,9 +136,10 @@ final class DatabaseManager {
                         print("Updated the firebase")
                     }
                 }
-                
+                complation(true, nil)
             }
             else{
+                complation(false, nil)
                 print("Dog doesn't exist on Firebase")
             }
         }

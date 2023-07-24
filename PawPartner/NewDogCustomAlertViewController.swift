@@ -19,11 +19,14 @@ class NewDogCustomAlertViewController: UIViewController, PHPickerViewControllerD
     @IBOutlet weak var nameTextField: UITextField!
     var delegate:NewDogAlertDelegate? = nil
     var dogImage = UIImage(named: "ic_plus")
+    var isValidImage: Bool?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
     }
+    override func viewDidAppear(_ animated: Bool) {
+        isValidImage = false
+    }
+    
     
     @IBAction func onImageClicked(_ sender: Any) {
         var config = PHPickerConfiguration(photoLibrary: .shared())
@@ -46,6 +49,7 @@ class NewDogCustomAlertViewController: UIViewController, PHPickerViewControllerD
                         self.imageView.image = image
                     }
                     dogImage = image
+                    isValidImage = true
                 }
             }
         }
@@ -56,10 +60,18 @@ class NewDogCustomAlertViewController: UIViewController, PHPickerViewControllerD
     }
     @IBAction func onSaveClicked(_ sender: Any) {
         let name = nameTextField.text ?? ""
-        if(name != "" && !name.isEmpty){
-            delegate?.onSaveClicked(name: name, image: dogImage!)
-            self.dismiss(animated: true, completion: nil)
-            //print(imageView)
+        if(name != "" && !name.isEmpty && self.isValidImage!){
+            AlertHelper.showAlertWithCancelButton(on: self, title: "Register new Dog", message: "Are you sure you want to add \(name) as youre new Paw Partner?"){
+                self.delegate?.onSaveClicked(name: name, image: self.dogImage!)
+                self.dismiss(animated: true, completion: nil)
+            }
+        }else{
+            if !self.isValidImage!{
+                AlertHelper.showAlert(on: self, title: "Error", message: "Please choose an image for your dog!")
+            }else{
+                AlertHelper.showAlert(on: self, title: "Error", message: "Please choose a name for your dog!")
+                
+            }
         }
         
     }

@@ -102,8 +102,19 @@ class CustomAlertViewController: UIViewController {
 
     @IBAction func onSaveClicked(_ sender: Any) {
         if(self.selectedType != "" && datePicker.date >= Date() && self.selectedDog != ""){
-            delegate?.onSaveClicked(type: self.selectedType, date: datePicker.date, dogId: self.selectedDog)
-            self.dismiss(animated: true, completion: nil)
+            AlertHelper.showAlertWithCancelButton(on: self, title: "Notitications", message: "Are you sure you want to add new notification?"){
+                self.delegate?.onSaveClicked(type: self.selectedType, date: self.datePicker.date, dogId: self.selectedDog)
+                self.dismiss(animated: true, completion: nil)
+            }
+        }else{
+            if self.selectedType == ""{
+                AlertHelper.showAlert(on: self, title: "Error", message: "Please enter notification type")
+            }else if self.datePicker.date < Date(){
+                AlertHelper.showAlert(on: self, title: "Error", message: "Please enter future Date")
+            }else{
+                AlertHelper.showAlert(on: self, title: "Error", message: "Please choose to which dog to want to reffer the notification")
+            }
+            
         }
         
     }

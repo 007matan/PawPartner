@@ -10,6 +10,11 @@ import Kingfisher
 
 class HomePageViewController: UIViewController {
 
+    @IBOutlet weak var supperLabel: UILabel!
+    @IBOutlet weak var breakfastLabel: UILabel!
+    @IBOutlet weak var eveningLabel: UILabel!
+    @IBOutlet weak var afternoonLabel: UILabel!
+    @IBOutlet weak var morningLabel: UILabel!
     @IBOutlet weak var dogPicker: UIButton!
     @IBOutlet weak var morningWalk: UIButton!
     @IBOutlet weak var eveningWalk: UIButton!
@@ -29,12 +34,8 @@ class HomePageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        if let readedJson = UserDefaultsManager.shared.getUser(){
-            if let readedUser = User.decodeFromJson(jsonString: readedJson){
-                user = readedUser
-            }
-        }
-        setDogsPickerMenu()
+        
+        //setDogsPickerMenu()
         walkings = [morningWalk, afternoonWalk, eveningWalk]
         meals = [breakfast, supper]
         petImage.backgroundColor = .blue
@@ -43,9 +44,48 @@ class HomePageViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let readedJson = UserDefaultsManager.shared.getUser(){
+            if let readedUser = User.decodeFromJson(jsonString: readedJson){
+                user = readedUser
+            }
+        }
+        setDogsPickerMenu()
+        if !user!.dogs.isEmpty{
+            test(flag: false)
+            updateUI(dog: user!.dogs[0])
+            self.currentDog = user?.dogs[0]
+            self.collectionView.dataSource = self
+            self.collectionView.delegate = self
+            self.collectionView.reloadData()
+        }else{
+            // diable wlking and meals buttons
+            test(flag: true)
+            AlertHelper.showAlertWithCancelButton(on: self, title: "Congratulation!", message: "Thank you for Choosing Paw Partner!\nWould you like to add youre Paw Partner now?"){
+                
+                
+                // goto myDogs page
+            }
+        }
+    }
+    
+    func test(flag: Bool){
+        for i in walkings{
+            i.isHidden = flag
+        }
+        for i in meals{
+            i.isHidden = flag
+        }
+        self.breakfastLabel.isHidden = flag
+        self.eveningLabel.isHidden = flag
+        self.supperLabel.isHidden = flag
+        self.morningLabel.isHidden = flag
+        self.afternoonLabel.isHidden = flag
+        
+    }
+    
     func setDogsPickerMenu(){
         var children: [UIAction] = []
-        
         for dog in user!.dogs{
             let action = UIAction(title: dog.name, handler: { _ in
                 self.updateUI(dog: dog)
@@ -57,6 +97,7 @@ class HomePageViewController: UIViewController {
             children.append(action)
         }
         dogPicker.menu = UIMenu(title:"Pick Dog", options: .displayInline, children: children)
+        
     }
     
     func updateUI(dog: Dog){
@@ -104,22 +145,33 @@ class HomePageViewController: UIViewController {
     
     
     @IBAction func onMorningWalkClicked(_ sender: Any) {
-        updateWalking(WalkingIndex: 0)
+        AlertHelper.showAlertWithCancelButton(on: self, title: "Alert", message: "Would you like to update \(self.currentDog!.name) morning walk status?"){
+            self.updateWalking(WalkingIndex: 0)
+        }
+        
         
     }
     @IBAction func onAfternoonWalkClicked(_ sender: Any) {
-        updateWalking(WalkingIndex: 1)
+        AlertHelper.showAlertWithCancelButton(on: self, title: "Alert", message: "Would you like to update \(self.currentDog!.name) afternoon walk status?"){
+            self.updateWalking(WalkingIndex: 1)
+        }
     }
     @IBAction func onEveningWalkClicked(_ sender: Any) {
-        updateWalking(WalkingIndex: 2)
+        AlertHelper.showAlertWithCancelButton(on: self, title: "Alert", message: "Would you like to update \(self.currentDog!.name) evening walk status?"){
+            self.updateWalking(WalkingIndex: 2)
+        }
         
     }
     @IBAction func onBreakfastClicked(_ sender: Any) {
-        updateMeal(mealIndex: 0)
+        AlertHelper.showAlertWithCancelButton(on: self, title: "Alert", message: "Would you like to update \(self.currentDog!.name) breakfast status?"){
+            self.updateMeal(mealIndex: 0)
+        }
         
     }
     @IBAction func onSupperClicked(_ sender: Any) {
-        updateMeal(mealIndex: 1)
+        AlertHelper.showAlertWithCancelButton(on: self, title: "Alert", message: "Would you like to update \(self.currentDog!.name) supper status?"){
+            self.updateMeal(mealIndex: 1)
+        }
     }
     
     func updateMeal(mealIndex: Int){
@@ -145,7 +197,7 @@ class HomePageViewController: UIViewController {
                         self.meals[mealIndex].setImage(UIImage(named: image), for: .normal)
                         print("seccsess")
                     }else{
-                        print("Failed")
+                        AlertHelper.showAlert(on: self, title: "Error", message: "Something went wrong, Please try again!")
                     }
                 }
     }
@@ -173,7 +225,7 @@ class HomePageViewController: UIViewController {
                         self.walkings[WalkingIndex].setImage(UIImage(named: image), for: .normal)
                         print("seccsess")
                     }else{
-                        print("Failed")
+                        AlertHelper.showAlert(on: self, title: "Error", message: "Something went wrong, Please try again!")
                     }
                 }
     }
