@@ -47,14 +47,7 @@ class CustomAlertViewController: UIViewController {
         dogPicker.menu = UIMenu(title:"Pick Dog", options: .displayInline, children: children)
     }
     
-    
-    
-    
-    
-    
-    
     func setNitificationPickerMenu(){
-
         notificationPicker.menu = UIMenu(title:"Pick notification type",options: .displayInline, children: [
             UIAction(title: "Barber", image: UIImage(named: "Barber"), handler: {(_) in
                 print("test1")

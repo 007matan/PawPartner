@@ -531,10 +531,15 @@
                                     <constraint firstItem="PYF-wE-O6O" firstAttribute="leading" secondItem="XdS-1m-DcT" secondAttribute="leading" constant="20" symbolic="YES" id="tLb-PF-dWs"/>
                                     <constraint firstItem="PYF-wE-O6O" firstAttribute="centerY" secondItem="FA8-b7-ks2" secondAttribute="centerY" id="yG9-Ie-yvK"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bGo-yz-OHp"/>
-                        <color key="backgroundColor" systemColor="systemGrayColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="XdS-1m-DcT" firstAttribute="centerY" secondItem="bGo-yz-OHp" secondAttribute="centerY" constant="29" id="RdV-t4-sgv"/>
                             <constraint firstItem="XdS-1m-DcT" firstAttribute="centerX" secondItem="bGo-yz-OHp" secondAttribute="centerX" id="VBb-MX-dEA"/>
@@ -629,10 +634,15 @@
                                     <constraint firstItem="NDY-eM-DwV" firstAttribute="centerX" secondItem="tYP-pD-gPs" secondAttribute="centerX" id="y3i-6X-5N5"/>
                                     <constraint firstAttribute="trailing" secondItem="syT-2Q-xPc" secondAttribute="trailing" constant="40" id="y4S-Wi-wrw"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SMW-cY-utb"/>
-                        <color key="backgroundColor" systemColor="systemGrayColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="tYP-pD-gPs" firstAttribute="centerX" secondItem="SMW-cY-utb" secondAttribute="centerX" id="RgP-0g-ggu"/>
                             <constraint firstItem="tYP-pD-gPs" firstAttribute="centerY" secondItem="SMW-cY-utb" secondAttribute="centerY" constant="-12" id="S3C-6Z-f0l"/>
@@ -744,10 +754,15 @@
                                     <constraint firstItem="KlL-Sr-NMS" firstAttribute="centerY" secondItem="ddu-QE-xQv" secondAttribute="centerY" id="tSa-vE-H6w"/>
                                     <constraint firstItem="ddu-QE-xQv" firstAttribute="top" secondItem="cDt-Vp-FeV" secondAttribute="bottom" constant="40" id="vAG-Jg-dln"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5nL-v6-08t"/>
-                        <color key="backgroundColor" systemColor="systemGrayColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ObZ-T2-6uT" firstAttribute="centerX" secondItem="5nL-v6-08t" secondAttribute="centerX" id="ejl-40-Cna"/>
                             <constraint firstItem="ObZ-T2-6uT" firstAttribute="centerY" secondItem="5nL-v6-08t" secondAttribute="centerY" id="ozD-Kp-wHD"/>
@@ -1367,9 +1382,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
