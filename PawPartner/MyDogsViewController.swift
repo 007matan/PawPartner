@@ -18,8 +18,12 @@ class MyDogsViewController: UIViewController {
     var user: User?
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "mydogs_background")!)
+        BackgroungHelper.assignBackground(to: view, imagePath: "mydogs_background")
+        
         if let readedJson = UserDefaultsManager.shared.getUser(){
             if let readedUser = User.decodeFromJson(jsonString: readedJson){
                 self.user = readedUser
@@ -35,6 +39,12 @@ class MyDogsViewController: UIViewController {
         myDogsCollectionView.dataSource = self
         myDogsCollectionView.delegate = self
     }
+    
+    
+    
+    
+    
+    
     
     @IBAction func onNewDogClicked(_ sender: Any) {
         let customAlert = self.storyboard?.instantiateViewController(identifier: "NewDogCustomAlertViewController") as! NewDogCustomAlertViewController
@@ -64,6 +74,8 @@ extension MyDogsViewController: UICollectionViewDelegate,UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MyDogsCollectionViewCell
+        cell.layer.borderWidth = 1
+        cell.layer.cornerRadius = 20
         cell.name.text = names[indexPath.row]
         let url = URL(string: images[indexPath.row])
         cell.image.kf.setImage(with: url)

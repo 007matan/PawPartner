@@ -28,7 +28,26 @@ class UserDefaultsManager {
 }
 
 
+
+
 import UIKit
+
+
+class BackgroungHelper{
+    static func assignBackground(to view: UIView, imagePath: String) {
+            let background = UIImage(named: imagePath)
+            var imageView: UIImageView!
+            imageView = UIImageView(frame: view.bounds)
+            imageView.contentMode = UIView.ContentMode.scaleAspectFill
+            imageView.clipsToBounds = true
+            imageView.image = background
+            imageView.center = view.center
+            imageView.alpha = 0.5
+            view.addSubview(imageView)
+            view.sendSubviewToBack(imageView)
+        }
+    
+}
 
 class AlertHelper {
     
@@ -62,5 +81,4 @@ class AlertHelper {
         viewController.present(dialogMessage, animated: true, completion: nil)
     }
 
-    
 }

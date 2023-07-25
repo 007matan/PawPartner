@@ -19,6 +19,7 @@ class NotificationsViewController: UIViewController,CustomAlertDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        BackgroungHelper.assignBackground(to: view, imagePath: "mydogs_background")
         notificationCollectionView.dataSource = self
         notificationCollectionView.delegate = self
     }

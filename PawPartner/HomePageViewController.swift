@@ -34,7 +34,7 @@ class HomePageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        BackgroungHelper.assignBackground(to: view, imagePath: "mydogs_background")
         //setDogsPickerMenu()
         walkings = [morningWalk, afternoonWalk, eveningWalk]
         meals = [breakfast, supper]
@@ -62,9 +62,7 @@ class HomePageViewController: UIViewController {
             // diable wlking and meals buttons
             test(flag: true)
             AlertHelper.showAlertWithCancelButton(on: self, title: "Congratulation!", message: "Thank you for Choosing Paw Partner!\nWould you like to add youre Paw Partner now?"){
-                
-                
-                // goto myDogs page
+                // goto MyDogsViewController page -> future feature
             }
         }
     }
@@ -141,7 +139,6 @@ class HomePageViewController: UIViewController {
         }
     }
     
-
     
     
     @IBAction func onMorningWalkClicked(_ sender: Any) {
@@ -239,6 +236,8 @@ extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataS
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! HomePageCollectionViewCell
+        cell.layer.borderWidth = 1
+        cell.layer.cornerRadius = cell.frame.width / 3
         cell.typeLabel.text = notificationList[indexPath.row]//"cell" - the name of cell attribute
         cell.imageView.image = UIImage(named: notificationList[indexPath.row])
         cell.dateLabel.text = notificationDates[indexPath.row]
