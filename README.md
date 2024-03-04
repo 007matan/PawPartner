@@ -22,4 +22,4 @@ Paw Partners leverages the power of:
 ### How to Get Started 🚀
 1. Clone the repository.
    ```bash
-   git clone https://github.com/your-username/paw-partners.git
+   git clone https://github.com/007matan/pawpartners.git
