@@ -13,9 +13,9 @@ Paw Partners is a collaborative effort using Xcode and Swift, bringing you the u
 
 - **Share the Love**: Invite family members, friends, or trusted pet sitters to join your pet's care network, fostering a sense of community around your beloved companion.
 
-  ![project-image 1](https://raw.githubusercontent.com/007matan/PawPartner/refs/heads/main/paw_partner_pic_1.png)
-  
-  ![project-image 4](https://raw.githubusercontent.com/007matan/PawPartner/refs/heads/main/paw_partner_pic_4.png)
+<img src="https://raw.githubusercontent.com/007matan/PawPartner/refs/heads/main/paw_partner_pic_1.png" alt="project-image 1" width="400" />
+
+<img src="https://raw.githubusercontent.com/007matan/PawPartner/refs/heads/main/paw_partner_pic_4.png" alt="project-image 4" width="400" />
   
 
 ### Technology Stack 💻
