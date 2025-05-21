@@ -3,7 +3,7 @@
 
 ## Welcome to Paw Partners - The All-in-One Pet Management App! 🌟
 
-<img src="https://raw.githubusercontent.com/007matan/PawPartner/refs/heads/main/paw_partner_pic_g.png" alt="project-image 1" width="400" />
+<img src="https://raw.githubusercontent.com/007matan/PawPartner/refs/heads/main/paw_partner_pic_g.png" alt="project-image 1" width="600" />
 
 ### About Paw Partners
 Paw Partners is a collaborative effort using Xcode and Swift, bringing you the ultimate app to ensure your pet's well-being is at its best. 🚀
